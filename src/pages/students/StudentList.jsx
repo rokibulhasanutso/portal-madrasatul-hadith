@@ -18,7 +18,8 @@ const StudentList = () => {
     const { data, error } = await supabase
       .from("students")
       .select("id, studentName, roll")
-      .eq("class_code", classcode);
+      .eq("class_code", classcode)
+      .order("id", "desc");
 
     const { data: classLabel, error: classError } = await supabase
       .from("classes")
