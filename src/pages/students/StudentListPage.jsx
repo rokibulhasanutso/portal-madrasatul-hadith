@@ -51,7 +51,7 @@ const StudentListPage = () => {
     console.log("click");
   };
   return (
-    <div className="py-5 px-6 bg-gray-900/50 backdrop-blur-sm min-h-[calc(100svh-68px)] font-bangla text-lg">
+    <div className="py-5 px-6 bg-gray-900/50 backdrop-blur-sm min-h-[calc(100vh-68px)] font-bangla text-lg">
       <h1 className="text-2xl text-center my-8">{data.class} শ্রেণী</h1>
 
       <div className="space-y-5">

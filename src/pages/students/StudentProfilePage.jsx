@@ -55,7 +55,7 @@ const StudentProfilePage = () => {
 
   return (
     <>
-      <div className="py-5 px-6 bg-gray-900/50 backdrop-blur-sm min-h-[calc(100svh-68px)] font-bangla text-lg">
+      <div className="py-5 px-6 bg-gray-900/50 backdrop-blur-sm min-h-[calc(100vh-68px)] font-bangla text-lg">
         <div className="w-full my-8 flex justify-center gap-8">
           {/* student image */}
           <div className="relative size-30">

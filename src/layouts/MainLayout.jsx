@@ -26,7 +26,7 @@ const MainLayout = () => {
     <>
       <div
         ref={mainContentRef}
-        className="bg-app bg-[url(/assets/home-background.jpg)] bg-no-repeat bg-top h-svh overflow-auto"
+        className="bg-app bg-[url(/assets/home-background.jpg)] bg-no-repeat bg-top h-vh overflow-auto"
         id="app-area"
       >
         <div className="max-w-screen-sm min-h-svh mx-auto flex flex-col text-white">
@@ -48,7 +48,7 @@ const MainLayout = () => {
             </button>
           </header>
 
-          <main className="flex-1 min-h-[calc(100svh-68px)]">
+          <main className="flex-1 min-h-[calc(100vh-68px)]">
             <Outlet />
           </main>
 
