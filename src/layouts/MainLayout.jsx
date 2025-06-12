@@ -48,7 +48,7 @@ const MainLayout = () => {
             </button>
           </header>
 
-          <main className="flex-1">
+          <main className="flex-1 min-h-[calc(100svh-68px)]">
             <Outlet />
           </main>
 
