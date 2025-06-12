@@ -1,57 +1,75 @@
+import { Route, Routes } from "react-router-dom";
 import AuthLayout from "./layouts/AuthLayout";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import ProtectRoute from "./ProtectRoute";
 import HomePage from "./pages/HomePage";
-import StudentPage from "./pages/StudentPage";
-import StudentAddPage from "./pages/StudentAddPage";
-import StudentProfilePage from "./pages/StudentProfilePage";
-import StudentEditPage from "./pages/StudentEditPage";
+import StudentAddPage from "./pages/students/StudentAddPage";
+import StudentProfilePage from "./pages/students/StudentProfilePage";
 import NoticePage from "./pages/notice/NoticePage";
 import CreateNotice from "./pages/notice/CreateNotice";
 import NoticeDetails from "./pages/notice/NoticeDetails";
 import NoticeEdit from "./pages/notice/NoticeEdit";
-import StudentList from "./pages/students/StudentList";
 import NoticeSmsSend from "./pages/notice/NoticeSmsSend";
+import TeacherHomePage from "./pages/teachers/TeacherHomePage";
+import StudentHomePage from "./pages/students/StudentHomePage";
+import StudentListPage from "./pages/students/StudentListPage";
+import TeacherAddPage from "./pages/teachers/TeacherAddPage";
+import TeacherEditPage from "./pages/teachers/TeacherEditPage";
+import StudentEditPage from "./pages/students/StudentEditPage";
+import TeacherProfilePage from "./pages/teachers/TeacherProfilePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/auth" element={<AuthLayout />} />
+    <Routes>
+      <Route path="/auth" element={<AuthLayout />} />
 
-        <Route
-          path="/"
-          element={
-            <ProtectRoute>
-              <MainLayout />
-            </ProtectRoute>
-          }
-        >
-          <Route index element={<HomePage />} />
-          <Route path="students">
-            <Route index element={<StudentPage />} />
-            <Route path="add" element={<StudentAddPage />} />
-            <Route path="edit/:student_id" element={<StudentEditPage />} />
-            <Route path=":class_id" element={<StudentList />} />
-            <Route
-              path=":class_id/:student_id"
-              element={<StudentProfilePage />}
-            />
-          </Route>
-          <Route path="notice">
-            <Route index element={<NoticePage />} />
-            <Route path="create" element={<CreateNotice />} />
-            <Route path="edit/:notice_id" element={<NoticeEdit />} />
-            <Route path=":notice_id" element={<NoticeDetails />} />
-            <Route
-              path="send-sms/:notice_id/:class_id"
-              element={<NoticeSmsSend />}
-            />
-          </Route>
+      <Route
+        path="/"
+        element={
+          <ProtectRoute>
+            <MainLayout />
+          </ProtectRoute>
+        }
+      >
+        <Route index element={<HomePage />} />
+
+        {/* teachers route */}
+        <Route path="teachers">
+          <Route index element={<TeacherHomePage />} />
+          <Route path="profile" element={<TeacherProfilePage />} />
+          <Route path="add" element={<TeacherAddPage />} />
+          <Route path="edit/:teacher_id" element={<TeacherEditPage />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
+
+        {/* students route */}
+        <Route path="students">
+          <Route index element={<StudentHomePage />} />
+          <Route path="add" element={<StudentAddPage />} />
+          <Route path="edit/:student_id" element={<StudentEditPage />} />
+          <Route path=":class_id" element={<StudentListPage />} />
+          <Route
+            path=":class_id/:student_id"
+            element={<StudentProfilePage />}
+          />
+        </Route>
+
+        {/* notice route */}
+        <Route path="notice">
+          <Route index element={<NoticePage />} />
+          <Route path="create" element={<CreateNotice />} />
+          <Route path="edit/:notice_id" element={<NoticeEdit />} />
+          <Route path=":notice_id" element={<NoticeDetails />} />
+          <Route
+            path="send-sms/:notice_id/:class_id"
+            element={<NoticeSmsSend />}
+          />
+        </Route>
+
+        {/* not found route */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 };
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import StudentForm from "../components/StudentForm";
-import supabase from "../supabase/config";
 import { LoaderCircle } from "lucide-react";
+import StudentForm from "../../components/StudentForm";
+import supabase from "../../supabase/config";
 
 const StudentEditPage = () => {
   const { student_id: studentID } = useParams();

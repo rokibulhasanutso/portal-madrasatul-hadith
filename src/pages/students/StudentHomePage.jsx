@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Plus, Search } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import supabase from "../supabase/config";
+import supabase from "../../supabase/config";
 
-const StudentPage = () => {
+const StudentHomePage = () => {
   const navigate = useNavigate();
   const [classesData, setClassesData] = useState([]);
   const [classesDataLoading, setClassesDataLoading] = useState(false);
@@ -79,4 +79,4 @@ const StudentPage = () => {
   );
 };
 
-export default StudentPage;
+export default StudentHomePage;

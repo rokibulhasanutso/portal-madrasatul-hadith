@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import supabase from "../supabase/config";
+import supabase from "../../supabase/config";
 import { Camera, FileEdit, MessageSquare, PhoneCall } from "lucide-react";
-import { enToBnNumber } from "../utils/functions";
-import NumberSelectModal from "../components/NumberSelectModal";
+import { enToBnNumber } from "../../utils/functions";
+import NumberSelectModal from "../../components/NumberSelectModal";
 
 const StudentProfilePage = () => {
   const { class_id, student_id } = useParams();

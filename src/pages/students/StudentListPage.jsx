@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import supabase from "../../supabase/config";
 import { enToBnNumber } from "../../utils/functions";
 
-const StudentList = () => {
+const StudentListPage = () => {
   const { class_id } = useParams();
   const [data, setData] = useState({
     class: "",
@@ -103,4 +103,4 @@ const StudentList = () => {
   );
 };
 
-export default StudentList;
+export default StudentListPage;

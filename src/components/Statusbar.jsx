@@ -5,19 +5,21 @@ const Statusbar = () => {
   return (
     <div className="w-full bg-gray-800/75 backdrop-blur-xs rounded-2xl p-4 font-bangla grid grid-cols-4 justify-between">
       {/* cate 1 */}
-      <div className="space-y-2">
-        <div className="size-14 rounded-full overflow-hidden mx-auto bg-white">
-          <img
-            src="/assets/teacher-avater.png"
-            className="size-full"
-            alt="Teacher Image"
-          />
+      <Link to={"/teachers"}>
+        <div className="space-y-2">
+          <div className="size-14 rounded-full overflow-hidden mx-auto bg-white">
+            <img
+              src="/assets/teacher-avater.png"
+              className="size-full"
+              alt="Teacher Image"
+            />
+          </div>
+          <div className="text-center text-sm font-bangla ">
+            <p>শিক্ষক</p>
+            <p>৫/৭</p>
+          </div>
         </div>
-        <div className="text-center text-sm font-bangla ">
-          <p>শিক্ষক</p>
-          <p>৫/৭</p>
-        </div>
-      </div>
+      </Link>
 
       {/* cate 2 */}
       <Link to={"/students"}>

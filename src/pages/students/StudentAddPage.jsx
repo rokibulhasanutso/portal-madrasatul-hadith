@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import StudentForm from "../components/StudentForm";
+import StudentForm from "../../components/StudentForm";
 
 const StudentAddPage = () => {
   const [submitData, setSubmitData] = useState({});
 
-  console.log(submitData);
+  
 
   return (
     <>

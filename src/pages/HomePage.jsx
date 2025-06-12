@@ -1,10 +1,18 @@
 import React from "react";
 import Statusbar from "../components/Statusbar";
+import { useBanglaDateTime } from "../hook/useBanglaDateTime";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const banglaDateTime = useBanglaDateTime();
+
   return (
     <div className="*:my-10">
-      <div className="flex justify-center items-center gap-6 px-5">
+      <div
+        onClick={() => navigate("/teachers/profile")}
+        className="flex justify-center items-center gap-6 px-5"
+      >
         {/* heading  */}
         <div className="size-28 rounded-full overflow-hidden ring-4 ring-gray-700">
           <img
@@ -21,9 +29,9 @@ const HomePage = () => {
 
       {/* watch */}
       <div className="flex justify-center">
-        <div className="bg-gray-900/90 backdrop-blur-xs rounded-xl p-4 font-bangla text-2xl ring-4 ring-gray-700 text-center">
-          <p>সকাল ৮ : ৩০</p>
-          <p className="text-base">বৃহঃস্পতিবার, ১৫ জানুয়ারী, ২০২৫</p>
+        <div className="bg-gray-900/90 backdrop-blur-xs rounded-xl p-4 font-bangla text-2xl ring-4 ring-gray-700 text-center min-w-50">
+          <p>{banglaDateTime.time}</p>
+          <p className="text-base">{banglaDateTime.date}</p>
         </div>
       </div>
 
