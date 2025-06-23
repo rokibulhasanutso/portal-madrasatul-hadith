@@ -62,7 +62,7 @@ const StudentProfilePage = () => {
           <div className="relative size-30">
             <div className="size-full rounded-full overflow-hidden ring-4 ring-gray-700">
               <img
-                src="/assets/student-avater.png"
+                src={ data?.studentImage || "/assets/student-avater.png"}
                 className="size-full"
                 alt="User Image"
               />
