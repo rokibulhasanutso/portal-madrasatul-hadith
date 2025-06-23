@@ -2,6 +2,7 @@ import { Menu, QrCode, ScanQrCode } from "lucide-react";
 import React, { useRef, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./../components/Sidebar";
+import NetworkStatus from "../components/NetworkStatus";
 
 const MainLayout = () => {
   const mainContentRef = useRef();
@@ -25,11 +26,10 @@ const MainLayout = () => {
   return (
     <>
       <div
-        ref={mainContentRef}
-        className="bg-app bg-[url(/assets/home-background.jpg)] bg-no-repeat bg-top h-vh overflow-auto"
+        className="bg-app bg-[url(/assets/home-background.jpg)] bg-no-repeat bg-top"
         id="app-area"
       >
-        <div className="max-w-screen-sm min-h-svh mx-auto flex flex-col text-white">
+        <div className="max-w-screen-sm h-screen mx-auto flex flex-col text-white">
           <header
             className={`flex justify-between items-center p-5 sticky top-0 z-50 transition-all duration-500 ${
               isScrolled ? "backdrop-blur-xl bg-gray-900/75" : ""
@@ -48,7 +48,13 @@ const MainLayout = () => {
             </button>
           </header>
 
-          <main className="flex-1 min-h-[calc(100vh-68px)]">
+          {/* notwork status */}
+          <NetworkStatus />
+
+          <main
+            ref={mainContentRef}
+            className="flex-1 h-[calc(100vh-68px)] overflow-auto"
+          >
             <Outlet />
           </main>
 

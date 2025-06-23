@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import supabase from "../../supabase/config";
 import { enToBnNumber } from "../../utils/functions";
+import LoadingComponent from "../../components/LoadingComponent";
 
 const StudentListPage = () => {
   const { class_id } = useParams();
@@ -51,7 +52,7 @@ const StudentListPage = () => {
     console.log("click");
   };
   return (
-    <div className="py-5 px-6 bg-gray-900/50 backdrop-blur-sm min-h-[calc(100vh-68px)] font-bangla text-lg">
+    <div className="area-wrapper bg-content-blur font-bangla text-lg">
       <h1 className="text-2xl text-center my-8">{data.class} শ্রেণী</h1>
 
       <div className="space-y-5">
@@ -71,33 +72,35 @@ const StudentListPage = () => {
           </div>
         </div>
 
-        <div className="space-y-5">
-          {data.students.map((data) => (
-            <Link
-              key={data.id}
-              to={`/students/${class_id}/${data.id}`}
-              className="block"
-            >
-              <div className="w-full ring-2 ring-gray-700 bg-gray-800/85 backdrop-blur-[6px] rounded-xl p-4 font-bangla">
-                <div className="flex justify-between items-center">
-                  <div className="flex gap-3">
-                    <p>{enToBnNumber(data.roll)}.</p>
-                    <p className="*:block">
-                      <span className="text-lg">{data.studentName}</span>
-                      <span className="text-base">উপস্থিতিঃ ০%</span>
-                    </p>
+        <LoadingComponent loadingState={studentsDataLoading}>
+          <div className="space-y-5">
+            {data.students.map((data) => (
+              <Link
+                key={data.id}
+                to={`/students/${class_id}/${data.id}`}
+                className="block"
+              >
+                <div className="w-full ring-2 ring-gray-700 bg-gray-800/85 backdrop-blur-[6px] rounded-xl p-4 font-bangla">
+                  <div className="flex justify-between items-center">
+                    <div className="flex gap-3">
+                      <p>{enToBnNumber(data.roll)}.</p>
+                      <p className="*:block">
+                        <span className="text-lg">{data.studentName}</span>
+                        <span className="text-base">উপস্থিতিঃ ০%</span>
+                      </p>
+                    </div>
+                    <button
+                      onClick={handleCall}
+                      className="ring-2 ring-gray-700 p-2 rounded"
+                    >
+                      <PhoneCall />
+                    </button>
                   </div>
-                  <button
-                    onClick={handleCall}
-                    className="ring-2 ring-gray-700 p-2 rounded"
-                  >
-                    <PhoneCall />
-                  </button>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        </LoadingComponent>
       </div>
     </div>
   );

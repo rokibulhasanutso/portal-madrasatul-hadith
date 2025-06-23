@@ -8,7 +8,7 @@ const StudentAddPage = () => {
 
   return (
     <>
-      <div className="py-5 px-6 bg-gray-900/50 backdrop-blur-sm h-full font-bangla text-lg">
+      <div className="area-wrapper bg-content-blur font-bangla text-lg">
         <h1 className="text-2xl text-center my-8">
           নতুন শিক্ষার্থী ভর্তি ফর্ম
         </h1>

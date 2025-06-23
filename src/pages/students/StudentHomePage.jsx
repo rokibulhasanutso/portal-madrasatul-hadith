@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Plus, Search } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../supabase/config";
+import LoadingComponent from "../../components/LoadingComponent";
 
 const StudentHomePage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const StudentHomePage = () => {
   }, []);
 
   return (
-    <div className="mx-5">
+    <div className="m-5">
       {/* Serach students by name */}
       <div>
         <form>
@@ -53,28 +54,30 @@ const StudentHomePage = () => {
         </button>
       </div>
 
-      {/* classes contents */}
-      <div className="my-5 mt-10">
-        {/* <p className="my-2 text-lg font-medium font-bangla">সকল শ্রেণী সমূহ</p> */}
+      <LoadingComponent loadingState={classesDataLoading}>
+        {/* classes contents */}
+        <div className="my-5 mt-10">
+          {/* <p className="my-2 text-lg font-medium font-bangla">সকল শ্রেণী সমূহ</p> */}
 
-        <div className="space-y-4">
-          {classesData?.map((data) => (
-            <Link
-              key={data.id}
-              to={`/students/${data.class_code}`}
-              className="block"
-            >
-              <div className="w-full ring-2 ring-gray-700 bg-gray-800/85 backdrop-blur-[6px] rounded-xl p-4 font-bangla">
-                <div className="grid grid-cols-3 justify-between items-center">
-                  <p>{data.classLabel} শ্রেণী</p>
-                  <p className="text-center">২৯ / ৩৫</p>
-                  <p className="text-end">৭৮ %</p>
+          <div className="space-y-4">
+            {classesData?.map((data) => (
+              <Link
+                key={data.id}
+                to={`/students/${data.class_code}`}
+                className="block"
+              >
+                <div className="w-full ring-2 ring-gray-700 bg-gray-800/85 backdrop-blur-[6px] rounded-xl p-4 font-bangla">
+                  <div className="grid grid-cols-3 justify-between items-center">
+                    <p>{data.classLabel} শ্রেণী</p>
+                    <p className="text-center">২৯ / ৩৫</p>
+                    <p className="text-end">৭৮ %</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      </LoadingComponent>
     </div>
   );
 };

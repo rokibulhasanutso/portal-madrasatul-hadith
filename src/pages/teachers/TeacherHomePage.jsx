@@ -5,7 +5,7 @@ const TeacherHomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="mx-5">
+    <div className="m-5">
       {/* Serach students by name */}
       <div>
         <form>

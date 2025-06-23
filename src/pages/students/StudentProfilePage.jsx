@@ -4,6 +4,7 @@ import supabase from "../../supabase/config";
 import { Camera, FileEdit, MessageSquare, PhoneCall } from "lucide-react";
 import { enToBnNumber } from "../../utils/functions";
 import NumberSelectModal from "../../components/NumberSelectModal";
+import LoadingComponent from "../../components/LoadingComponent";
 
 const StudentProfilePage = () => {
   const { class_id, student_id } = useParams();
@@ -54,8 +55,8 @@ const StudentProfilePage = () => {
   };
 
   return (
-    <>
-      <div className="py-5 px-6 bg-gray-900/50 backdrop-blur-sm min-h-[calc(100vh-68px)] font-bangla text-lg">
+    <LoadingComponent loadingState={loading}>
+      <div className="area-wrapper bg-content-blur font-bangla text-lg">
         <div className="w-full my-8 flex justify-center gap-8">
           {/* student image */}
           <div className="relative size-30">
@@ -113,7 +114,6 @@ const StudentProfilePage = () => {
           </button>
           <button className="text-center ring-2 ring-gray-700 rounded-xl flex items-center py-2 px-4 bg-gray-900 ">
             <span className="block mx-auto">বেতন</span>
-            {/* </> */}
           </button>
         </div>
 
@@ -241,7 +241,7 @@ const StudentProfilePage = () => {
       </div>
 
       {/* {numberSelectModalOpen && <NumberSelectModal data={{ ...data }} />} */}
-    </>
+    </LoadingComponent>
   );
 };
 

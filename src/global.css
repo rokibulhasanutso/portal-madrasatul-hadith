@@ -19,3 +19,13 @@
   --font-galada: "galada", "cursive"; 
   --color-app: #00030c;
 }
+
+@layer utilities {
+  .bg-content-blur {
+    @apply bg-gray-900/50 backdrop-blur-sm min-h-full
+  }
+
+  .area-wrapper {
+    @apply py-5 px-6
+  }
+}

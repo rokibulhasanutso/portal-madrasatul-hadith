@@ -18,6 +18,7 @@ import TeacherEditPage from "./pages/teachers/TeacherEditPage";
 import StudentEditPage from "./pages/students/StudentEditPage";
 import TeacherProfilePage from "./pages/teachers/TeacherProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ImageUploader from "./components/UploadImageTest";
 
 const App = () => {
   return (
@@ -68,6 +69,9 @@ const App = () => {
 
         {/* not found route */}
         <Route path="*" element={<NotFoundPage />} />
+
+        {/* test route */}
+        <Route path="/text-image-upload" element={<ImageUploader />} />
       </Route>
     </Routes>
   );

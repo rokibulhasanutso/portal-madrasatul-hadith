@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { LoaderCircle } from "lucide-react";
 import StudentForm from "../../components/StudentForm";
 import supabase from "../../supabase/config";
+import LoadingComponent from "../../components/LoadingComponent";
 
 const StudentEditPage = () => {
   const { student_id: studentID } = useParams();
@@ -55,22 +55,17 @@ const StudentEditPage = () => {
   }, [studentID]);
 
   return (
-    <div className="py-5 px-6 bg-gray-900/50 backdrop-blur-sm min-h-[calc(100svh-68px)] font-bangla text-lg">
+    <div className="area-wrapper bg-content-blur font-bangla text-lg">
       <h1 className="text-2xl text-center my-8">
         শিক্ষার্থী তথ্য পরিবর্তন করুন
       </h1>
 
-      {oneStudentLoading ? (
-        <div className="flex justify-center gap-2">
-          <LoaderCircle className="animate-spin size-7" />
-          <p>অপেক্ষা করুন...</p>
-        </div>
-      ) : (
+      <LoadingComponent loadingState={oneStudentLoading}>
         <StudentForm
           defaultValue={oneStudentData}
           onSubmit={(value) => updateData(value)}
         />
-      )}
+      </LoadingComponent>
     </div>
   );
 };
