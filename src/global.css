@@ -28,4 +28,8 @@
   .area-wrapper {
     @apply py-5 px-6
   }
+
+  .page-size-A4 {
+    @apply w-[210mm] h-[297mm];
+  }
 }

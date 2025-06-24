@@ -56,6 +56,8 @@ const StudentForm = ({ defaultValue = {}, onSubmit = () => null }) => {
 
   const onFileChange = (event) => {
     const file = event.target.files[0];
+
+
     if (file) {
       handleImageUpload(file, "student-image", defaultValue?.id);
     }
@@ -102,7 +104,7 @@ const StudentForm = ({ defaultValue = {}, onSubmit = () => null }) => {
                 uploadedUrl ||
                 "/assets/student-avater.png"
               }
-              className="size-full"
+              className="size-full bg-cover bg-top"
               alt="User Image"
             />
             {uploading ? (

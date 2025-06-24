@@ -33,11 +33,13 @@ const useImageUpload = () => {
       // Upload to Supabase
       const filePath = `${fileName}.png`;
 
-      const { error } = await supabase.storage
+      const { data, error } = await supabase.storage
         .from(bucketName)
         .update(filePath, compressedFile, {
           upsert: true,
         });
+
+      console.log(data);
 
       if (error) {
         console.error("Upload error:", error.message);

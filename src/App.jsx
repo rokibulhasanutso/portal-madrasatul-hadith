@@ -19,6 +19,7 @@ import StudentEditPage from "./pages/students/StudentEditPage";
 import TeacherProfilePage from "./pages/teachers/TeacherProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ImageUploader from "./components/UploadImageTest";
+import ExamAdmitFile from "./components/ExamAdmitFile";
 
 const App = () => {
   return (
@@ -72,6 +73,7 @@ const App = () => {
 
         {/* test route */}
         <Route path="/text-image-upload" element={<ImageUploader />} />
+        <Route path="/test-pdf" element={<ExamAdmitFile />} />
       </Route>
     </Routes>
   );

@@ -11,7 +11,7 @@ const StudentProfilePage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
-  const [numberSelectModalOpen, setNumberSelectModal] = useState(false);
+  // const [numberSelectModalOpen, setNumberSelectModal] = useState(false);
 
   const getOneStudent = async (classcode, studentId) => {
     setLoading(true);
