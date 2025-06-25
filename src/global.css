@@ -32,4 +32,43 @@
   .page-size-A4 {
     @apply w-[210mm] h-[297mm];
   }
+
+  .background-logo::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    background: url('/assets/logo-transparent.jpg') no-repeat center;
+    background-size: cover;
+    transform: translate(-50%, -50%); 
+    z-index: -1;
+    opacity: 0.1;
+  }
+  .background-area::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/assets/pageBorderFrame/admit-border-frame.png') no-repeat center;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.5;
+  }
+  
+  .background-area::after {
+    content: "";
+    position: absolute;
+    bottom: 22px;
+    left: 32px;
+    width: calc(100% - 64px);
+    height: calc(100% - 64px);
+    background: url('/assets/admit-masque-bg.png') no-repeat center;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.1;
+  }
 }

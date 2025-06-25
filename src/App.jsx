@@ -21,6 +21,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ImageUploader from "./components/UploadImageTest";
 import ExamAdmitFile from "./components/ExamAdmitFile";
 import PDFTestForMobile from "./components/PDFTestForMobile";
+import ExamAdmitCard from "./components/ExamAdmitCard";
+import AdmitListPage from "./pages/exam/AdmitListPage";
 
 const App = () => {
   return (
@@ -77,6 +79,8 @@ const App = () => {
         <Route path="/test-pdf" element={<ExamAdmitFile />} />
         <Route path="/test-pdf-mobile" element={<PDFTestForMobile />} />
       </Route>
+      <Route path="/admit-card" element={<ExamAdmitCard />} />
+      <Route path="/admit-list" element={<AdmitListPage />} />
     </Routes>
   );
 };

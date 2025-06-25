@@ -8,6 +8,7 @@ import {
   Font,
   pdf,
 } from "@react-pdf/renderer";
+import ExamAdmitCard from "./ExamAdmitCard";
 
 // ফন্ট রেজিস্ট্রেশন (বাংলা ফন্ট)
 Font.register({
@@ -57,7 +58,7 @@ const MyPDFDocument = () => (
 // মূল কম্পোনেন্ট
 const PDFTestForMobile = () => {
   const handleViewPDF = async () => {
-    const blob = await pdf(<MyPDFDocument />).toBlob();
+    const blob = await pdf(<ExamAdmitCard />).toBlob();
     const url = URL.createObjectURL(blob);
     window.open(url, ""); // নতুন ট্যাবে PDF দেখাবে
   };

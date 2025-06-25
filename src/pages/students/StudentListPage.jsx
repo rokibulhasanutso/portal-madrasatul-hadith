@@ -18,7 +18,7 @@ const StudentListPage = () => {
 
     const { data, error } = await supabase
       .from("students")
-      .select("id, studentName, roll")
+      .select("id, studentName, roll, studentImage")
       .eq("class_code", classcode)
       .order("id", "desc");
 
@@ -84,6 +84,16 @@ const StudentListPage = () => {
                   <div className="flex justify-between items-center">
                     <div className="flex gap-3">
                       <p>{enToBnNumber(data.roll)}.</p>
+                      <div className="size-12">
+                        <img
+                          src={
+                            data?.studentImage ||
+                            "https://cdn-icons-png.flaticon.com/512/12225/12225935.png"
+                          }
+                          alt="Student Image"
+                          className="size-full bg-cover bg-top rounded"
+                        />
+                      </div>
                       <p className="*:block">
                         <span className="text-lg">{data.studentName}</span>
                         <span className="text-base">উপস্থিতিঃ ০%</span>
