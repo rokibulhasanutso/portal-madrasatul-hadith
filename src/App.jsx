@@ -23,6 +23,7 @@ import ExamAdmitFile from "./components/ExamAdmitFile";
 import PDFTestForMobile from "./components/PDFTestForMobile";
 import ExamAdmitCard from "./components/ExamAdmitCard";
 import AdmitListPage from "./pages/exam/AdmitListPage";
+import QRCodeGenerator from "./components/QRCodeGenerator";
 
 const App = () => {
   return (
@@ -81,6 +82,7 @@ const App = () => {
       </Route>
       <Route path="/admit-card" element={<ExamAdmitCard />} />
       <Route path="/admit-list" element={<AdmitListPage />} />
+      <Route path="/qr" element={<QRCodeGenerator />} />
     </Routes>
   );
 };

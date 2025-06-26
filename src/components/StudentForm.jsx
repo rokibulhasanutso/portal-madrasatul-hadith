@@ -5,7 +5,11 @@ import { filterValidObject } from "../utils/functions";
 import useImageUpload from "../hook/useImageUpload";
 import supabase from "../supabase/config";
 
-const StudentForm = ({ defaultValue = {}, onSubmit = () => null }) => {
+const StudentForm = ({
+  defaultValue = {},
+  onSubmit = () => null,
+  imageUploadOptionDisable = false,
+}) => {
   const fileInputRef = useRef(null);
 
   const [formData, setFormData] = useState(() => ({
@@ -57,7 +61,6 @@ const StudentForm = ({ defaultValue = {}, onSubmit = () => null }) => {
   const onFileChange = (event) => {
     const file = event.target.files[0];
 
-
     if (file) {
       handleImageUpload(file, "student-image", defaultValue?.id);
     }
@@ -83,41 +86,44 @@ const StudentForm = ({ defaultValue = {}, onSubmit = () => null }) => {
 
   return (
     <>
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInputRef}
-        style={{ display: "none" }}
-        onChange={onFileChange}
-      />
-
       <div className="my-8 space-y-8">
         {/* student image */}
-        <div
-          className="relative w-40 mx-auto"
-          onClick={handleImageUploadTrigger}
-        >
-          <div className="size-40 rounded-full overflow-hidden ring-4 ring-gray-700 mx-auto my-8">
-            <img
-              src={
-                defaultValue.studentImage ||
-                uploadedUrl ||
-                "/assets/student-avater.png"
-              }
-              className="size-full bg-cover bg-top"
-              alt="User Image"
+        {imageUploadOptionDisable && (
+          <>
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={onFileChange}
             />
-            {uploading ? (
-              <div className="absolute inset-0 flex justify-center items-center p-2 bg-gray-900/75 backdrop-blur-sm rounded-full">
-                <Loader className="size-10 animate-spin" />
+            <div
+              className="relative w-40 mx-auto"
+              onClick={handleImageUploadTrigger}
+            >
+              <div className="size-40 rounded-full overflow-hidden ring-4 ring-gray-700 mx-auto my-8">
+                <img
+                  src={
+                    defaultValue.studentImage ||
+                    uploadedUrl ||
+                    "/assets/student-avater.png"
+                  }
+                  className="size-full bg-cover bg-top"
+                  alt="User Image"
+                />
+                {uploading ? (
+                  <div className="absolute inset-0 flex justify-center items-center p-2 bg-gray-900/75 backdrop-blur-sm rounded-full">
+                    <Loader className="size-10 animate-spin" />
+                  </div>
+                ) : (
+                  <div className="absolute bottom-0 right-0 p-2 bg-gray-900/75 backdrop-blur-sm rounded-full">
+                    <Plus size={24} />
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className="absolute bottom-0 right-0 p-2 bg-gray-900/75 backdrop-blur-sm rounded-full">
-                <Plus size={24} />
-              </div>
-            )}
-          </div>
-        </div>
+            </div>
+          </>
+        )}
 
         {/* student info */}
         <div>

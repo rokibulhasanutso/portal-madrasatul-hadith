@@ -35,7 +35,7 @@ const StudentEditPage = () => {
   };
 
   const updateData = async (updateData) => {
-    console.log(updateData);
+    // console.log(updateData);
     const { data, error } = await supabase
       .from("students")
       .upsert({ id: studentID, ...updateData })
@@ -64,6 +64,7 @@ const StudentEditPage = () => {
         <StudentForm
           defaultValue={oneStudentData}
           onSubmit={(value) => updateData(value)}
+          imageUploadOptionDisable={true}
         />
       </LoadingComponent>
     </div>

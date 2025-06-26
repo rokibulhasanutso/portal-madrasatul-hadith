@@ -1,50 +1,41 @@
 import React, { useEffect, useState } from "react";
 import supabase from "../../supabase/config";
 import ExamAdmitCard from "../../components/ExamAdmitCard";
+import { useSearchParams } from "react-router-dom";
 
 const AdmitListPage = () => {
   const [studentsDataLoading, setStudentsDataLoading] = useState(false);
+  const [seachparams] = useSearchParams();
   const [data, setData] = useState([]);
 
-  const getStudentsByClass = async () => {
+  const getStudentsByClass = async (class_code) => {
     setStudentsDataLoading(true);
 
-    const { data, error } = await supabase
+    let query = supabase
       .from("students")
       .select(
         `id, studentName, class_code, roll, studentImage, classes (classLabel)`
       )
-      .eq("class_code", 7)
       .order("id", "desc");
+
+    if (parseInt(class_code)) {
+      query = query.eq("class_code", class_code);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
       console.log(error);
     } else {
       setData(data);
     }
-
-    // const { data: classLabel, error: classError } = await supabase
-    //   .from("classes")
-    //   .select("*")
-    //   .eq("class_code", classcode)
-    //   .single();
-
-    // if (error) {
-    //   console.log(error);
-    // }
-    // if (data && classLabel) {
-    //   setData({
-    //     class: classLabel.classLabel,
-    //     students: data,
-    //   });
-    // }
-
+    
     setStudentsDataLoading(false);
   };
 
   useEffect(() => {
-    getStudentsByClass();
-  }, []);
+    getStudentsByClass(seachparams.get("class_code"));
+  }, [seachparams]);
 
   return (
     <div>
