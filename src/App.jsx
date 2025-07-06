@@ -27,6 +27,8 @@ import QRCodeGenerator from "./components/QRCodeGenerator";
 import SitStiker from "./pages/exam/SitStiker";
 import ExamPage from "./pages/exam/ExamPage";
 import AddNewExam from "./pages/exam/AddNewExam";
+import ResultPage from "./pages/Result/ResultPage";
+import ResultUpdatePage from "./pages/Result/ResultUpdatePage";
 
 const App = () => {
   return (
@@ -79,10 +81,12 @@ const App = () => {
         <Route path="exams">
           <Route index element={<ExamPage />} />
           <Route path="create" element={<AddNewExam />} />
-          <Route
-            path="send-sms/:notice_id/:class_id"
-            element={<NoticeSmsSend />}
-          />
+        </Route>
+
+        {/* test primary label route */}
+        <Route path="results">
+          <Route index element={<ResultPage />} />
+          <Route path="update" element={<ResultUpdatePage />} />
         </Route>
 
         {/* not found route */}

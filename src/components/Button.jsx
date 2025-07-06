@@ -12,7 +12,9 @@ const Button = ({
     <button
       onClick={onClick}
       className={cn(
-        "text-center ring-2 ring-gray-700 rounded-xl flex items-center gap-2 py-2 px-4 bg-gray-900",
+        `${
+          Icon ? "flex items-center gap-3.5" : "text-center"
+        } ring-2 ring-gray-700 rounded-xl py-2 px-4 bg-gray-900`,
         className
       )}
     >

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Statusbar = () => {
   return (
-    <div className="w-full bg-gray-800/75 backdrop-blur-xs rounded-2xl p-4 font-bangla grid grid-cols-4 justify-between">
+    <div className="w-full bg-gray-800/75 backdrop-blur-xs rounded-2xl p-4 font-bangla grid grid-cols-4 gap-y-4 justify-between">
       {/* cate 1 */}
       <Link to={"/teachers"}>
         <div className="space-y-2">
@@ -43,8 +43,8 @@ const Statusbar = () => {
         <div className="space-y-2">
           <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
             <img
-              src="/assets/resultsheet-icon2.png"
-              className="size-[75%]"
+              src="/assets/exam-icon.png"
+              className="size-full"
               alt="Teacher Image"
             />
           </div>
@@ -67,6 +67,23 @@ const Statusbar = () => {
           </div>
           <div className="text-center text-sm font-bangla ">
             <p>নোটিশ প্রেরণ</p>
+            {/* <p>৫/৭</p> */}
+          </div>
+        </div>
+      </Link>
+
+      {/* cate 5 */}
+      <Link to={"/results"}>
+        <div className="space-y-2">
+          <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
+            <img
+              src="/assets/resultsheet-icon2.png"
+              className="size-[75%]"
+              alt="Teacher Image"
+            />
+          </div>
+          <div className="text-center text-sm font-bangla ">
+            <p>পরীক্ষার ফলাফল</p>
             {/* <p>৫/৭</p> */}
           </div>
         </div>
