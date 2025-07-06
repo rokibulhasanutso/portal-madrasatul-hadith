@@ -31,7 +31,8 @@ const ExamAdmitCard = ({ data }) => {
   return (
     <>
       <div className="relative background-area h-1/2 bg-cover px-14 py-12 font-bangla border-b border-dashed border-gray-300">
-        <div className="grid grid-cols-4 place-content-center  p-2 border-b-2 border-[#f9d7d7] bg-[#ffe8e8]">
+        {/* <div className="grid grid-cols-4 place-content-center  p-2 border-b-2 border-[#f9d7d7] bg-[#ffe8e8]"> */}
+        <div className="grid grid-cols-4 place-content-center  p-2 border-b-2 border-[#fbbdbd] bg-[#ffd3d3]">
           <div className="size-16 mx-2.5 p-1">
             <img
               src="/assets/logo-transparent.jpg"
@@ -87,14 +88,14 @@ const ExamAdmitCard = ({ data }) => {
               </table>
             </div>
             <div className="flex justify-center items-center gap-5">
-              <div className="size-24 border-2 border-gray-100 rounded-full text-center p-4 flex justify-center items-center text-xs text-gray-300">
-                পরীক্ষায় অনুমদিত সিল মোহর
+              <div className="size-24 border-2 border-gray-300 rounded-full text-center p-4 flex justify-center items-center text-xs text-gray-500">
+                পরীক্ষায় অনুমদিত সিল মোহর ও স্বাক্ষর
               </div>
               <div className="size-28 justify-self-end">
                 <img
                   src={data.studentImage || "/public/assets/student-avater.png"}
                   alt="Student Image"
-                  className="size-full bg-cover bg-top rounded-md ring-2 ring-gray-300"
+                  className="size-full bg-cover bg-top rounded-md ring-2 ring-gray-500"
                 />
               </div>
             </div>
@@ -106,7 +107,7 @@ const ExamAdmitCard = ({ data }) => {
               পরীক্ষার রুটিন
             </h1>
             <div>
-              <table className="border-collapse w-full border-2 border-gray-400">
+              <table className="border-collapse w-full border-2 border-gray-500">
                 <tbody>
                   <tr className="*:border *:border-gray-500 *:w-1/10 text-center *:leading-4.5">
                     <td>তারিখ</td>
@@ -125,7 +126,7 @@ const ExamAdmitCard = ({ data }) => {
                   ).map((data, i) => (
                     <tr
                       key={i}
-                      className="*:border *:border-gray-400 *:w-1/10 text-center *:leading-4.5"
+                      className="*:border *:border-gray-500 *:w-1/10 text-center *:leading-4.5"
                     >
                       <td>{data[0]?.date}</td>
                       <td>{data[0]?.week}</td>
@@ -146,9 +147,9 @@ const ExamAdmitCard = ({ data }) => {
             <p>*** পরীক্ষা প্রতিদিন সকাল ৯টা থেকে শুরু হবে ইনশাআল্লাহ।</p>
             <div className="flex flex-col items-center">
               <img
-                src="/assets/author-principal-singnature.png"
+                src="/assets/author-vice-singnature.png"
                 alt="singnature"
-                className="w-15"
+                className="w-25 -mb-2"
               />
               <p className="text-sm">পরিচালকের স্বাক্ষর</p>
             </div>

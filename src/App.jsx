@@ -24,6 +24,9 @@ import PDFTestForMobile from "./components/PDFTestForMobile";
 import ExamAdmitCard from "./components/ExamAdmitCard";
 import AdmitListPage from "./pages/exam/AdmitListPage";
 import QRCodeGenerator from "./components/QRCodeGenerator";
+import SitStiker from "./pages/exam/SitStiker";
+import ExamPage from "./pages/exam/ExamPage";
+import AddNewExam from "./pages/exam/AddNewExam";
 
 const App = () => {
   return (
@@ -72,6 +75,16 @@ const App = () => {
           />
         </Route>
 
+        {/* exams */}
+        <Route path="exams">
+          <Route index element={<ExamPage />} />
+          <Route path="create" element={<AddNewExam />} />
+          <Route
+            path="send-sms/:notice_id/:class_id"
+            element={<NoticeSmsSend />}
+          />
+        </Route>
+
         {/* not found route */}
         <Route path="*" element={<NotFoundPage />} />
 
@@ -82,6 +95,7 @@ const App = () => {
       </Route>
       <Route path="/admit-card" element={<ExamAdmitCard />} />
       <Route path="/admit-list" element={<AdmitListPage />} />
+      <Route path="/sit-sticker" element={<SitStiker />} />
       <Route path="/qr" element={<QRCodeGenerator />} />
     </Routes>
   );

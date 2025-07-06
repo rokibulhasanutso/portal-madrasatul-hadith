@@ -39,19 +39,21 @@ const Statusbar = () => {
       </Link>
 
       {/* cate 3 */}
-      <div className="space-y-2">
-        <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
-          <img
-            src="/assets/resultsheet-icon2.png"
-            className="size-[75%]"
-            alt="Teacher Image"
-          />
+      <Link to={"/exams"}>
+        <div className="space-y-2">
+          <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
+            <img
+              src="/assets/resultsheet-icon2.png"
+              className="size-[75%]"
+              alt="Teacher Image"
+            />
+          </div>
+          <div className="text-center text-sm font-bangla ">
+            <p>পরীক্ষা সংক্রান্ত</p>
+            {/* <p>৫/৭</p> */}
+          </div>
         </div>
-        <div className="text-center text-sm font-bangla ">
-          <p>পরীক্ষার ফলাফল</p>
-          {/* <p>৫/৭</p> */}
-        </div>
-      </div>
+      </Link>
 
       {/* cate 4 */}
       <Link to={"/notice"}>
