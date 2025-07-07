@@ -7,6 +7,7 @@ import TextInput from "../../components/TextInput";
 import { secondTermExamSubjects } from "../../static/SecondTermExamRoutine";
 import LoadingComponent from "../../components/LoadingComponent";
 import Button from "../../components/Button";
+import { Loader } from "lucide-react";
 
 const ResultUpdatePage = () => {
   const [searchParams] = useSearchParams();
@@ -149,7 +150,7 @@ const ResultUpdatePage = () => {
                   </p>
                 </div>
                 <div>
-                  {/* <TextInput
+                  <TextInput
                     className={"my-0"}
                     type="number"
                     inputClassName={
@@ -168,8 +169,8 @@ const ResultUpdatePage = () => {
                         parseInt(e.target.value || 0)
                       )
                     }
-                  /> */}
-                  <input
+                  />
+                  {/* <input
                     type="number"
                     className="border w-full font-sans p-2 text-center rounded-xl"
                     placeholder={"00"}
@@ -185,17 +186,26 @@ const ResultUpdatePage = () => {
                         parseInt(e.target.value || 0)
                       )
                     }
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
           ))}
           <div>
             <Button
-              value={"আপডেট করুন"}
+              // value={"আপডেট করুন"}
               className={"w-full py-5 my-10"}
               onClick={handleSubmit}
-            />
+            >
+              {loading.submit ? (
+                <div className="flex items-center justify-center gap-2.5">
+                  <Loader className="size-7 animate-spin" />{" "}
+                  <span>আপডেট হচ্ছে</span>
+                </div>
+              ) : (
+                "আপডেট করুন"
+              )}
+            </Button>
           </div>
         </LoadingComponent>
       </div>
