@@ -6,6 +6,7 @@ import BackgroundBlurWrapper from "../../components/BackgroundBlurWrapper";
 import TextInput from "../../components/TextInput";
 import { secondTermExamSubjects } from "../../static/SecondTermExamRoutine";
 import LoadingComponent from "../../components/LoadingComponent";
+import Button from "../../components/Button";
 
 const ResultUpdatePage = () => {
   const [searchParams] = useSearchParams();
@@ -17,7 +18,11 @@ const ResultUpdatePage = () => {
   });
   const [loading, setLoading] = useState({
     students: false,
+    query: false,
+    submit: false,
   });
+  const [query, setQuery] = useState([]);
+  const [submitData, setSubmitData] = useState([]);
 
   const getStudents = async () => {
     setLoading((prev) => ({ ...prev, students: true }));
@@ -34,6 +39,27 @@ const ResultUpdatePage = () => {
 
     if (data) {
       setData((prev) => ({ ...prev, students: data }));
+      getResults(data.map((s) => s.id));
+    }
+
+    setLoading((prev) => ({ ...prev, students: false }));
+  };
+
+  const getResults = async (ids) => {
+    setLoading((prev) => ({ ...prev, students: true }));
+
+    const { data, error } = await supabase
+      .from("resultTest")
+      .select(`id, ${subjectCode}`)
+      .in("id", ids)
+      .order("id", { ascending: true });
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data) {
+      setQuery(data);
     }
 
     setLoading((prev) => ({ ...prev, students: false }));
@@ -42,6 +68,44 @@ const ResultUpdatePage = () => {
   useEffect(() => {
     getStudents();
   }, []);
+
+  const handleUpdateData = (studentId, subjectCode, marks) => {
+    console.log("call", studentId, subjectCode, marks);
+    const index = query.findIndex((item) => item.id === studentId);
+
+    if (index !== -1) {
+      // ✅ If item exists: update
+      const updatedData = query.map((item) =>
+        item.id === studentId ? { ...item, [subjectCode]: marks } : item
+      );
+      setQuery(updatedData);
+    } else {
+      // ✅ If item doesn't exist: insert new
+      const newItem = { id: studentId, [subjectCode]: marks };
+      setQuery((prev) => [...prev, newItem]);
+    }
+  };
+
+  const handleSubmit = async () => {
+    setLoading((prev) => ({ ...prev, submit: true }));
+
+    const { data, error } = await supabase
+      .from("resultTest")
+      .upsert(query)
+      .select();
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data) {
+      setQuery(data);
+    }
+
+    setLoading((prev) => ({ ...prev, submit: false }));
+  };
+
+  // console.log(query);
 
   return (
     <BackgroundBlurWrapper>
@@ -54,6 +118,8 @@ const ResultUpdatePage = () => {
           {secondTermExamSubjects[subjectCode]}
         </p>
       </div>
+
+      {}
 
       <div className="space-y-4 my-4">
         <LoadingComponent loadingState={loading.students}>
@@ -83,18 +149,54 @@ const ResultUpdatePage = () => {
                   </p>
                 </div>
                 <div>
-                  <TextInput
+                  {/* <TextInput
                     className={"my-0"}
                     type="number"
                     inputClassName={
                       "*:text-center bg-gray-950 *:ml-0 font-sans"
                     }
                     placeholder={"00"}
+                    defaultValue={
+                      query.find((item) => item.id === data.id)?.[
+                        subjectCode
+                      ] || ""
+                    }
+                    onChange={(e) =>
+                      handleUpdateData(
+                        data.id,
+                        subjectCode,
+                        parseInt(e.target.value || 0)
+                      )
+                    }
+                  /> */}
+                  <input
+                    type="number"
+                    className="border w-full font-sans p-2 text-center rounded-xl"
+                    placeholder={"00"}
+                    defaultValue={
+                      query.find((item) => item.id === data.id)?.[
+                        subjectCode
+                      ] || ""
+                    }
+                    onChange={(e) =>
+                      handleUpdateData(
+                        data.id,
+                        subjectCode,
+                        parseInt(e.target.value || 0)
+                      )
+                    }
                   />
                 </div>
               </div>
             </div>
           ))}
+          <div>
+            <Button
+              value={"আপডেট করুন"}
+              className={"w-full py-5 my-10"}
+              onClick={handleSubmit}
+            />
+          </div>
         </LoadingComponent>
       </div>
     </BackgroundBlurWrapper>
