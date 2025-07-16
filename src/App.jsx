@@ -29,6 +29,8 @@ import ExamPage from "./pages/exam/ExamPage";
 import AddNewExam from "./pages/exam/AddNewExam";
 import ResultPage from "./pages/Result/ResultPage";
 import ResultUpdatePage from "./pages/Result/ResultUpdatePage";
+import MakeQuestion from "./pages/make_questions/MakeQuestion";
+import ResultMarkSheet from "./pages/Result/ResultMarkSheet";
 
 const App = () => {
   return (
@@ -97,10 +99,12 @@ const App = () => {
         <Route path="/test-pdf" element={<ExamAdmitFile />} />
         <Route path="/test-pdf-mobile" element={<PDFTestForMobile />} />
       </Route>
+      <Route path="/results/mark-sheets" element={<ResultMarkSheet />} />
       <Route path="/admit-card" element={<ExamAdmitCard />} />
       <Route path="/admit-list" element={<AdmitListPage />} />
       <Route path="/sit-sticker" element={<SitStiker />} />
       <Route path="/qr" element={<QRCodeGenerator />} />
+      <Route path="/make-questions" element={<MakeQuestion />} />
     </Routes>
   );
 };

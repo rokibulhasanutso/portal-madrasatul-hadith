@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BackgroundBlurWrapper from "../../components/BackgroundBlurWrapper";
-import { BookOpenCheck, NotebookPen } from "lucide-react";
+import { BookOpenCheck, Check, NotebookPen } from "lucide-react";
 import Button from "../../components/Button";
 import supabase from "../../supabase/config";
 import SelectInput from "../../components/SelectInput";
@@ -18,6 +18,7 @@ const ResultPage = () => {
     subject_code: null,
     class_code: null,
   });
+  const [subjectWaysUpdateResult, setSubjectWaysUpdateResult] = useState({});
 
   const getClassList = async () => {
     const { data, error } = await supabase.from("classes").select("*");
@@ -41,6 +42,52 @@ const ResultPage = () => {
       }&s_c=${selectedData.subject_code}`
     );
   };
+
+  const getExamResultList = async () => {
+    try {
+      const subjectCodes =
+        secondTermExamClassBySubjectCodes[selectedData.class_code];
+
+      if (!subjectCodes || subjectCodes.length === 0) {
+        console.warn("No subject codes found for the selected class.");
+        return;
+      }
+
+      const { data, error } = await supabase.from("resultTest").select(`
+        id,
+        ${subjectCodes.join(",")},
+        students (
+          classes (
+            class_code
+          )
+        )
+      `);
+
+      if (error) {
+        console.error("Error fetching data:", error);
+        return;
+      }
+
+      const filteredData = data?.filter(
+        (item) => item.students?.classes?.class_code === selectedData.class_code
+      );
+
+      const result = subjectCodes.reduce((acc, subject) => {
+        acc[subject] = filteredData?.some((item) => item[subject] > 0) || false;
+        return acc;
+      }, {});
+
+      setSubjectWaysUpdateResult(result);
+    } catch (err) {
+      console.error("Unexpected error:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedData.class_code) {
+      getExamResultList();
+    }
+  }, [selectedData.class_code]);
 
   return (
     <BackgroundBlurWrapper>
@@ -70,7 +117,7 @@ const ResultPage = () => {
         </div>
 
         {/* tab contents */}
-        <div className="max-w-sm w-full px-10 my-16">
+        <div className="max-w-sm w-full px-10 my-16 mx-auto">
           {tab == 0 && (
             <div className="w-full">
               <h4 className="text-center">শ্রেণী ও বিষয় নির্বাচন করুন</h4>
@@ -116,6 +163,7 @@ const ResultPage = () => {
                   selectedData.class_code
                 ]?.map((data, index) => (
                   <option key={index} value={data}>
+                    {subjectWaysUpdateResult[data] && "✔"}{" "}
                     {secondTermExamSubjects[data]}
                   </option>
                 ))}
