@@ -9,10 +9,13 @@ import {
   secondTermExamSubjects,
 } from "../../static/SecondTermExamRoutine";
 import { useNavigate } from "react-router-dom";
+import AdjustSheetMobileScreen from "../../components/AdjustSheetMobileScreen";
+import ResultMarkSheetTemplate from "./ResultMarkSheetTemplate";
+import useResultsData from "../../hook/useResultsData";
 
 const ResultPage = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(1);
   const [classData, setClassData] = useState([]);
   const [selectedData, setSelectedData] = useState({
     subject_code: null,
@@ -89,6 +92,8 @@ const ResultPage = () => {
     }
   }, [selectedData.class_code]);
 
+  const { data: resultData, loading } = useResultsData();
+
   return (
     <BackgroundBlurWrapper>
       <div>
@@ -117,8 +122,8 @@ const ResultPage = () => {
         </div>
 
         {/* tab contents */}
-        <div className="max-w-sm w-full px-10 my-16 mx-auto">
-          {tab == 0 && (
+        {tab == 0 && (
+          <div className="max-w-sm w-full px-10 my-16 mx-auto">
             <div className="w-full">
               <h4 className="text-center">শ্রেণী ও বিষয় নির্বাচন করুন</h4>
 
@@ -179,8 +184,26 @@ const ResultPage = () => {
                 onClick={handleSubmit}
               />
             </div>
-          )}
-        </div>
+          </div>
+        )}
+        
+        {tab == 1 && (
+          <div className="h-[calc(100vh-300px)] rounded-xl overflow-auto">
+            <AdjustSheetMobileScreen>
+              {resultData?.map((item, i) => (
+                <div
+                  className="*:h-[297mm] text-black border border-gray-300"
+                  key={i}
+                >
+                  <ResultMarkSheetTemplate
+                    examName="Testing adjust sheet"
+                    data={item}
+                  />
+                </div>
+              ))}
+            </AdjustSheetMobileScreen>
+          </div>
+        )}
       </div>
     </BackgroundBlurWrapper>
   );
