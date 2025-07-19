@@ -31,6 +31,7 @@ import ResultPage from "./pages/Result/ResultPage";
 import ResultUpdatePage from "./pages/Result/ResultUpdatePage";
 import MakeQuestion from "./pages/make_questions/MakeQuestion";
 import ResultMarkSheet from "./pages/Result/ResultMarkSheet";
+import AdjustSheet from "./pages/test/AdjustSheet";
 
 const App = () => {
   return (
@@ -105,6 +106,11 @@ const App = () => {
       <Route path="/sit-sticker" element={<SitStiker />} />
       <Route path="/qr" element={<QRCodeGenerator />} />
       <Route path="/make-questions" element={<MakeQuestion />} />
+
+      {/* Test Route */}
+      <Route path="/test">
+        <Route path="adjust-sheet" element={<AdjustSheet />} />
+      </Route>
     </Routes>
   );
 };

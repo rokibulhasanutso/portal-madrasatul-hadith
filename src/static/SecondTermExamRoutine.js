@@ -140,3 +140,28 @@ export const secondTermExamClassBySubjectCodes = {
   6: [115, 116, 117, 101, 102, 103, 111, 112], // class 4
   7: [115, 116, 117, 101, 102, 103, 111, 112], // class 5
 };
+
+export const subjectInfo = {
+  101: { name: "বাংলা", fullMarks: 100 },
+  102: { name: "ইংরেজি", fullMarks: 100 },
+  103: { name: "গণিত", fullMarks: 100 },
+  104: { name: "আরবি লিখা", fullMarks: 100 },
+  105: { name: "হাদিস শরীফ", fullMarks: 100 },
+  106: { name: "ইংলিশ গ্রামার", fullMarks: 100 },
+  107: { name: "হিফজুল কুরআন ও তাজবীদ", fullMarks: 100 },
+  108: { name: "হাদিস শরীফ ও আসমাউল হুসনা", fullMarks: 100 },
+  109: { name: "কালিমা ও মাসায়িল", fullMarks: 100 },
+  110: { name: "আদইয়ায়ে সালাত ও আদইয়ায়ে মাসনূনাহ", fullMarks: 100 },
+  111: { name: "বাংলাদেশ ও বিশ্ব পরিচয়", fullMarks: 100 },
+  112: { name: "বিজ্ঞান", fullMarks: 100 },
+  113: { name: "পরিবেশ পরিচিতি ও সাধারণ জ্ঞান", fullMarks: 100 },
+  114: {
+    name: "পরিবেশ পরিচিতি সমাজ ও পরিবেশ পরিচিতি বিজ্ঞান ও সাধারণ জ্ঞান",
+    fullMarks: 100,
+  },
+  115: { name: "কুরআন মাজিদ", fullMarks: 100 },
+  116: { name: "আদ্ দুরূসুল আরাবিয়্যাহ্", fullMarks: 100 },
+  117: { name: "আকইদ ও ফিকাহ", fullMarks: 100 },
+  118: { name: "বাংলা দিয়ে ইংরেজি শিখি", fullMarks: 100 },
+  119: { name: "কালিমা ও মাসায়িল ও সাধারণ জ্ঞান", fullMarks: 100 },
+};
