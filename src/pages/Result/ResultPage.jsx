@@ -292,7 +292,7 @@ const ResultPage = () => {
                       })
                       ?.map((item, i) => (
                         <div
-                          className="*:h-[297mm] text-black border border-gray-300"
+                          className="*:h-[297mm] *:w-[210mm] text-black border border-gray-300"
                           key={i}
                         >
                           <ResultMarkSheetTemplate
