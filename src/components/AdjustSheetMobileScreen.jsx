@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import cn from "../utils/cn";
 
 const AdjustSheetMobileScreen = ({ className, children }) => {
@@ -19,7 +19,7 @@ const AdjustSheetMobileScreen = ({ className, children }) => {
   }, []);
 
   return (
-    <div className="m-5">
+    <div className="m-3.5">
       <div
         ref={contentRef}
         style={{ zoom }}
