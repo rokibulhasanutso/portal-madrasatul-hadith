@@ -59,11 +59,12 @@ const useResultsData = ({ idParam, classCodeParam, rollParams } = {}) => {
         };
       });
 
-      const totalGrade = hasFail
+      const totalGrade = getGrade(fullMarks, totalMarks);
+      let allOverGrade = hasFail
         ? "F"
-        : allAPlus
-        ? "A+"
-        : getGrade(fullMarks, totalMarks);
+        : totalGrade === "A+" && !allAPlus
+        ? "A"
+        : totalGrade;
 
       return {
         id: item.id,
@@ -74,7 +75,7 @@ const useResultsData = ({ idParam, classCodeParam, rollParams } = {}) => {
         studentImage: students?.studentImage || "",
         total_obtained_marks: totalMarks,
         total_full_marks: fullMarks,
-        grade: totalGrade,
+        grade: allOverGrade,
         results: subjectResults,
         created_at: item.created_at,
       };

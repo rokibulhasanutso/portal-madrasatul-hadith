@@ -1,26 +1,39 @@
-import React, { useEffect, useState } from "react";
-import BackgroundBlurWrapper from "../../components/BackgroundBlurWrapper";
-import { BookOpenCheck, Check, NotebookPen } from "lucide-react";
-import Button from "../../components/Button";
+import React, { Suspense, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import supabase from "../../supabase/config";
+import BackgroundBlurWrapper from "../../components/BackgroundBlurWrapper";
+import { BookOpenCheck, Download, Loader2, NotebookPen } from "lucide-react";
+import Button from "../../components/Button";
 import SelectInput from "../../components/SelectInput";
 import {
   secondTermExamClassBySubjectCodes,
   secondTermExamSubjects,
 } from "../../static/SecondTermExamRoutine";
-import { useNavigate } from "react-router-dom";
-import AdjustSheetMobileScreen from "../../components/AdjustSheetMobileScreen";
-import ResultMarkSheetTemplate from "./ResultMarkSheetTemplate";
+// import AdjustSheetMobileScreen from "../../components/AdjustSheetMobileScreen";
+const AdjustSheetMobileScreen = React.lazy(() =>
+  import("../../components/AdjustSheetMobileScreen")
+);
+const ResultMarkSheetTemplate = React.lazy(() =>
+  import("./ResultMarkSheetTemplate")
+);
 import useResultsData from "../../hook/useResultsData";
+import { enToBnNumber } from "../../utils/functions";
+import { usePdfDownloader } from "../../hook/usePdfDownloader";
 
 const ResultPage = () => {
   const navigate = useNavigate();
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState(0);
   const [classData, setClassData] = useState([]);
   const [selectedData, setSelectedData] = useState({
     subject_code: null,
     class_code: null,
   });
+
+  const [selectedForResult, setSelectedForResult] = useState({
+    class: null,
+    roll: null,
+  });
+
   const [subjectWaysUpdateResult, setSubjectWaysUpdateResult] = useState({});
 
   const getClassList = async () => {
@@ -35,16 +48,6 @@ const ResultPage = () => {
   useEffect(() => {
     getClassList();
   }, []);
-
-  const handleSubmit = () => {
-    // handle form submission
-    navigate(
-      `update?c_c=${selectedData.class_code}&ccl=${
-        classData.find((data) => data.class_code === selectedData.class_code)
-          .classLabel
-      }&s_c=${selectedData.subject_code}`
-    );
-  };
 
   const getExamResultList = async () => {
     try {
@@ -62,9 +65,9 @@ const ResultPage = () => {
         students (
           classes (
             class_code
-          )
+            )
         )
-      `);
+        `);
 
       if (error) {
         console.error("Error fetching data:", error);
@@ -92,7 +95,23 @@ const ResultPage = () => {
     }
   }, [selectedData.class_code]);
 
-  const { data: resultData, loading } = useResultsData();
+  const handleSubmit = () => {
+    // handle form submission
+    navigate(
+      `update?c_c=${selectedData.class_code}&ccl=${
+        classData.find((data) => data.class_code === selectedData.class_code)
+          .classLabel
+      }&s_c=${selectedData.subject_code}`
+    );
+  };
+
+  const { data: resultData, loading: resultLoading } = useResultsData();
+  const { downloadPdf, loading: sheetDownloadLoading } = usePdfDownloader({
+    sheetData: {
+      sheetName: "দ্বিতীয় সাময়িক পরীক্ষা - ২০২৫ইং",
+    },
+    elementName: ".sheet",
+  });
 
   return (
     <BackgroundBlurWrapper>
@@ -186,23 +205,121 @@ const ResultPage = () => {
             </div>
           </div>
         )}
-        
+
         {tab == 1 && (
-          <div className="h-[calc(100vh-300px)] rounded-xl overflow-auto">
-            <AdjustSheetMobileScreen>
-              {resultData?.map((item, i) => (
-                <div
-                  className="*:h-[297mm] text-black border border-gray-300"
-                  key={i}
-                >
-                  <ResultMarkSheetTemplate
-                    examName="Testing adjust sheet"
-                    data={item}
-                  />
+          <>
+            <div className="flex gap-3.5">
+              <SelectInput
+                className={`*:odd:bg-gray-800 *:my-1.5 ${
+                  selectedData.class_code ? "" : "text-gray-500 *:text-white"
+                }`}
+                firstOption={{
+                  value: null,
+                  label: "সকল শ্রেণী",
+                }}
+                onChange={(e) =>
+                  setSelectedForResult((prev) => ({
+                    ...prev,
+                    class: parseInt(e.target.value),
+                  }))
+                }
+              >
+                {classData.map((data, index) => (
+                  <option key={index} value={data.class_code}>
+                    {data.classLabel}
+                  </option>
+                ))}
+              </SelectInput>
+
+              <SelectInput
+                className={`*:odd:bg-gray-800 text-left *:my-1.5 ${
+                  selectedData.class_code ? "" : "text-gray-500 *:text-white"
+                }`}
+                firstOption={{
+                  value: null,
+                  label: "সকল শিক্ষার্থী",
+                }}
+                onChange={(e) =>
+                  setSelectedForResult((prev) => ({
+                    ...prev,
+                    roll: parseInt(e.target.value),
+                  }))
+                }
+              >
+                {resultData
+                  ?.filter(
+                    (student) => student.class_code === selectedForResult.class
+                  )
+                  .sort((a, b) => a.roll - b.roll)
+                  .map((data, index) => (
+                    <option key={index} value={data.roll}>
+                      {enToBnNumber(data.roll)}. {data.name}
+                    </option>
+                  ))}
+              </SelectInput>
+            </div>
+
+            <div className="h-[calc(100vh-390px)] rounded-xl overflow-auto bg-white text-black text-base">
+              <Suspense
+                fallback={
+                  <div className="h-full flex justify-center items-center gap-3.5">
+                    <Loader2 className="size-6 animate-spin" />
+                    <p>অপেক্ষা করুন</p>
+                  </div>
+                }
+              >
+                {resultLoading ? (
+                  <div className="h-full flex justify-center items-center gap-3.5">
+                    <Loader2 className="size-6 animate-spin" />
+                    <p>অপেক্ষা করুন</p>
+                  </div>
+                ) : (
+                  <AdjustSheetMobileScreen>
+                    {resultData
+                      ?.filter((student) => {
+                        const { class: class_code, roll } = selectedForResult;
+
+                        if (class_code && roll) {
+                          return (
+                            student.class_code === class_code &&
+                            parseInt(student.roll) === roll
+                          );
+                        } else if (class_code) {
+                          return student.class_code === class_code;
+                        } else {
+                          return true;
+                        }
+                      })
+                      ?.map((item, i) => (
+                        <div
+                          className="*:h-[297mm] text-black border border-gray-300"
+                          key={i}
+                        >
+                          <ResultMarkSheetTemplate
+                            sheetName={"sheet"}
+                            examName="দ্বিতীয় সাময়িক পরীক্ষা - ২০২৫ইং"
+                            data={item}
+                          />
+                        </div>
+                      ))}
+                  </AdjustSheetMobileScreen>
+                )}
+              </Suspense>
+            </div>
+
+            <div className="mt-8 flex justify-center">
+              <Button onClick={downloadPdf}>
+                <div className="flex gap-3.5">
+                  {sheetDownloadLoading ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    <Download />
+                  )}
+                  <p>Download Sheet</p>
                 </div>
-              ))}
-            </AdjustSheetMobileScreen>
-          </div>
+              </Button>
+            </div>
+          </>
         )}
       </div>
     </BackgroundBlurWrapper>

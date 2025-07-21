@@ -1,6 +1,5 @@
 import { enToBnNumber, getBanglaPosition } from "../../utils/functions";
 
-
 const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
   return (
     <div
@@ -144,7 +143,7 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
 
           {/* footer info */}
           <div className="flex justify-between">
-            <div className="text-xs">
+            <div className="text-xs *:text-nowrap">
               <p>প্রতিষ্ঠানের নাম: মাদ্‌রাসাতুল হদিস</p>
               <p>স্থাপিতঃ ২০২০ইং</p>
               <p>মাদ্‌রাসা ভিত্তিক প্রতিষ্ঠান</p>
