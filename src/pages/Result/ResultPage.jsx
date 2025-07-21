@@ -108,7 +108,13 @@ const ResultPage = () => {
   const { data: resultData, loading: resultLoading } = useResultsData();
   const { downloadPdf, loading: sheetDownloadLoading } = usePdfDownloader({
     sheetData: {
-      sheetName: "দ্বিতীয় সাময়িক পরীক্ষা - ২০২৫ইং",
+      sheetName: `দ্বিতীয় সাময়িক পরীক্ষা ২০২৫ইং - ${
+        classData?.[selectedForResult.class - 1]?.classLabel || "সকল"
+      } শ্রেণী${
+        selectedForResult.roll
+          ? ` - রোল ${enToBnNumber(selectedForResult.roll).padStart(2, "০")}`
+          : ""
+      }`,
     },
     elementName: ".sheet",
   });

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import cn from "../utils/cn";
 
 const AdjustSheetMobileScreen = ({ className, children }) => {
   const contentRef = useRef(null);
   const [zoom, setZoom] = useState(1);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => {
       if (contentRef.current) {
         const parentWidth = contentRef.current.parentElement.offsetWidth;
@@ -15,18 +15,18 @@ const AdjustSheetMobileScreen = ({ className, children }) => {
       }
     };
 
-    handleResize(); // Initial call
-    // window.addEventListener("resize", handleResize);
-    // return () => window.removeEventListener("resize", handleResize);
+    handleResize();
   }, []);
 
   return (
-    <div
-      ref={contentRef}
-      style={{ zoom }}
-      className={cn("w-[210mm] space-y-5 p-5 bg-gray-100", className)}
-    >
-      {children}
+    <div className="m-5">
+      <div
+        ref={contentRef}
+        style={{ zoom }}
+        className={cn("space-y-5 -ml-0.5", className)}
+      >
+        {children}
+      </div>
     </div>
   );
 };
