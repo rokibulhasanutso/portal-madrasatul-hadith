@@ -29,7 +29,7 @@ const MainLayout = () => {
         className="bg-app bg-[url(/assets/home-background.jpg)] bg-no-repeat bg-top"
         id="app-area"
       >
-        <div className="max-w-screen-sm h-screen mx-auto flex flex-col text-white">
+        <div className="max-w-screen-sm h-[100svh] mx-auto flex flex-col text-white">
           <header
             className={`flex justify-between items-center p-5 sticky top-0 z-50 transition-all duration-500 ${
               isScrolled ? "backdrop-blur-xl bg-gray-900/75" : ""

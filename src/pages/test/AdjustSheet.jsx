@@ -19,9 +19,11 @@ const AdjustSheet = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  console.log([data[0]]);
+
   return (
     <div style={{ zoom, width: "210mm", margin: "0 auto" }}>
-      {data.map((item, i) => (
+      {[data?.[0]]?.map((item, i) => (
         <div className="*:h-[297mm]" key={i}>
           <ResultMarkSheetTemplate
             examName="Testing adjust sheet"

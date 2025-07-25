@@ -29,27 +29,27 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
                   <tbody className="**:w-1/2">
                     <tr>
                       <td>শিক্ষার্থীর নামঃ</td>
-                      <td>{data.name}</td>
+                      <td>{data?.name}</td>
                     </tr>
                     <tr>
                       <td>রোলঃ</td>
-                      <td>{enToBnNumber(data.roll).padStart(2, "০")}</td>
+                      <td>{enToBnNumber(data?.roll).padStart(2, "০")}</td>
                     </tr>
                     <tr>
                       <td>শ্রেণীঃ</td>
-                      <td>{data.class}</td>
+                      <td>{data?.class}</td>
                     </tr>
                     <tr>
                       <td>প্রাপ্ত মোট নম্বরঃ</td>
-                      <td>{enToBnNumber(data.total_obtained_marks)}</td>
+                      <td>{enToBnNumber(data?.total_obtained_marks)}</td>
                     </tr>
                     <tr>
                       <td>প্রাপ্ত গ্রেডঃ</td>
-                      <td>{data.grade}</td>
+                      <td>{data?.grade}</td>
                     </tr>
                     <tr>
                       <td>স্থান অর্জন</td>
-                      <td>{getBanglaPosition(data.placement)}</td>
+                      <td>{getBanglaPosition(data?.placement)}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -114,9 +114,9 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
                   {data?.results?.map((data, index) => (
                     <tr key={index} className="*:border text-center ">
                       <td>{enToBnNumber(index + 1)}</td>
-                      <td className="px-4 text-left">{data.sub_name}</td>
-                      <td>{enToBnNumber(data.full_marks)}</td>
-                      <td>{enToBnNumber(data.obtained_marks)}</td>
+                      <td className="px-4 text-left">{data?.sub_name}</td>
+                      <td>{enToBnNumber(data?.full_marks)}</td>
+                      <td>{enToBnNumber(data?.obtained_marks)}</td>
                       <td>{data.grade}</td>
                     </tr>
                   ))}

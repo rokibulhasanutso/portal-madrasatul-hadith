@@ -9,7 +9,7 @@ const AdjustSheetMobileScreen = ({ className, children }) => {
     const handleResize = () => {
       if (contentRef.current) {
         const parentWidth = contentRef.current.parentElement.offsetWidth;
-        const sheetWidth = 794; // 210mm ≈ 794px
+        const sheetWidth = 793.7; // 210mm ≈ 794px
         const newZoom = parentWidth < sheetWidth ? parentWidth / sheetWidth : 1;
         setZoom(newZoom);
       }

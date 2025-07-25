@@ -1,5 +1,5 @@
-import { ArrowBigDown, ChevronRight, X } from "lucide-react";
-import React, { useEffect, useRef } from "react";
+import { ChevronRight, X } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./../providers/AuthProvider";
 
@@ -28,6 +28,15 @@ const Sidebar = ({ onClose, isOpen }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
+
+  const saticNavLink = [
+    { link: "/", name: "হোম" },
+    { link: "/students", name: "শিক্ষার্থী" },
+    { link: "/teachers", name: "শিক্ষকমণ্ডলী" },
+    { link: "/exams", name: "পরীক্ষা" },
+    { link: "/notice", name: "নোটিশ" },
+    { link: "/results", name: "পরীক্ষার ফলাফল" },
+  ];
 
   return (
     <div
@@ -84,18 +93,17 @@ const Sidebar = ({ onClose, isOpen }) => {
         </div>
 
         {/* navigation */}
-        <div className="text-white p-5 space-y-3.5">
-          {["শিক্ষকমণ্ডলী", "শিক্ষার্থী", "পরীক্ষা", "নোটিশ", "বেতনাদি"].map(
-            (item, index) => (
-              <Link
-                key={index}
-                className="w-full bg-gray-800/75 backdrop-blur-xs rounded-xl px-4 py-3.5 font-bangla leading-none flex justify-between items-center"
-              >
-                <span>{item}</span>
-                <ChevronRight className="size-5 text-gray-300" />
-              </Link>
-            )
-          )}
+        <div className="text-white p-5 space-y-3.5 h-[calc(100svh-300px)] overflow-auto">
+          {saticNavLink.map((item, index) => (
+            <Link
+              key={index}
+              className="w-full bg-gray-800/75 backdrop-blur-xs rounded-xl px-4 py-3.5 font-bangla leading-none flex justify-between items-center active:bg-gray-700"
+              to={item.link}
+            >
+              <span>{item.name}</span>
+              <ChevronRight className="size-5 text-gray-300" />
+            </Link>
+          ))}
         </div>
       </div>
     </div>
