@@ -11,7 +11,7 @@ export const usePdfDownloader = ({ sheetData = {}, elementName }) => {
     const pageElements = document.querySelectorAll(elementName);
 
     const scale = 3;
-    const imageQuality = 0.3;
+    const imageQuality = 0.8;
 
     for (let i = 0; i < pageElements.length; i++) {
       const page = pageElements[i];

@@ -247,7 +247,7 @@ const StudentForm = ({
           />
           <TextInput
             placeholder="পিতার মোবাইল নাম্বার"
-            inputClassName="rounded-lg"
+            inputClassName="rounded-lg font-serif"
             value={formData.fatherPhone}
             defaultValue={defaultValue.fatherPhone}
             onChange={handleChange("fatherPhone")}
@@ -261,7 +261,7 @@ const StudentForm = ({
           />
           <TextInput
             placeholder="মাতার মোবাইল নাম্বার"
-            inputClassName="rounded-lg"
+            inputClassName="rounded-lg font-serif"
             value={formData.motherPhone}
             defaultValue={defaultValue.motherPhone}
             onChange={handleChange("motherPhone")}
@@ -282,7 +282,7 @@ const StudentForm = ({
           />
           <TextInput
             placeholder="অন্যান্য অভিভাবক মোবাইল নাম্বার (যদি থাকে)"
-            inputClassName="rounded-lg"
+            inputClassName="rounded-lg font-serif"
             value={formData.otherGuardianPhone}
             defaultValue={defaultValue.otherGuardianPhone}
             onChange={handleChange("otherGuardianPhone")}

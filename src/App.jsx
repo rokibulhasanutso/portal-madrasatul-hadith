@@ -32,6 +32,7 @@ import ResultUpdatePage from "./pages/Result/ResultUpdatePage";
 import MakeQuestion from "./pages/make_questions/MakeQuestion";
 import ResultMarkSheet from "./pages/Result/ResultMarkSheet";
 import AdjustSheet from "./pages/test/AdjustSheet";
+import CenterExaminationStudentListingSheet from "./pages/test/CenterExaminationStudentListingSheet";
 
 const App = () => {
   return (
@@ -110,6 +111,10 @@ const App = () => {
       {/* Test Route */}
       <Route path="/test">
         <Route path="adjust-sheet" element={<AdjustSheet />} />
+        <Route
+          path="center-exam"
+          element={<CenterExaminationStudentListingSheet />}
+        />
       </Route>
     </Routes>
   );

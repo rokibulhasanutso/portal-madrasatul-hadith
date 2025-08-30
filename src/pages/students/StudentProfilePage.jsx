@@ -62,7 +62,7 @@ const StudentProfilePage = () => {
           <div className="relative size-30">
             <div className="size-full rounded-full overflow-hidden ring-4 ring-gray-700">
               <img
-                src={ data?.studentImage || "/assets/student-avater.png"}
+                src={data?.studentImage || "/assets/student-avater.png"}
                 className="size-full"
                 alt="User Image"
               />
@@ -182,7 +182,7 @@ const StudentProfilePage = () => {
                 </tr>
                 <tr>
                   <td>মোবাইল নাম্বারঃ</td>
-                  <td>{data.fatherPhone}</td>
+                  <td className="font-serif">{data.fatherPhone}</td>
                 </tr>
 
                 <tr>
@@ -200,7 +200,7 @@ const StudentProfilePage = () => {
                 </tr>
                 <tr>
                   <td>মোবাইল নাম্বারঃ</td>
-                  <td>{data.motherPhone}</td>
+                  <td className="font-serif">{data.motherPhone}</td>
                 </tr>
 
                 <tr>
@@ -218,7 +218,7 @@ const StudentProfilePage = () => {
                 </tr>
                 <tr>
                   <td>মোবাইল নাম্বারঃ</td>
-                  <td>{data.otherGuardianPhone}</td>
+                  <td className="font-serif">{data.otherGuardianPhone}</td>
                 </tr>
 
                 <tr>

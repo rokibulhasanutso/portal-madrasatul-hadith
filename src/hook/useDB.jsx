@@ -8,7 +8,10 @@ const useDB = ({ table, column = "*", filter = null }) => {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    let query = supabase.from(table).select(column);
+    let query = supabase
+      .from(table)
+      .select(column)
+      .order("id", { ascending: true });
 
     if (filter && filter.column && filter.value) {
       query = query.eq(filter.column, filter.value);

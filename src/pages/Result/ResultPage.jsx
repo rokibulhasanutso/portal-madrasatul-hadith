@@ -265,17 +265,17 @@ const ResultPage = () => {
               </SelectInput>
             </div>
 
-            <div className="h-[calc(100vh-390px)] rounded-xl overflow-auto bg-white text-black text-base">
+            <div className="h-[calc(100svh-400px)] rounded-xl overflow-auto bg-white text-black text-base">
               <Suspense
                 fallback={
-                  <div className="h-full flex justify-center items-center gap-3.5">
+                  <div className="h-full flex justify-center items-center gap-4">
                     <Loader2 className="size-6 animate-spin" />
                     <p>অপেক্ষা করুন</p>
                   </div>
                 }
               >
                 {resultLoading ? (
-                  <div className="h-full flex justify-center items-center gap-3.5">
+                  <div className="h-full flex justify-center items-center gap-4">
                     <Loader2 className="size-6 animate-spin" />
                     <p>অপেক্ষা করুন</p>
                   </div>

@@ -5,6 +5,8 @@ import TextInput from "../../components/TextInput";
 import { useEffect, useRef, useState } from "react";
 import { enToBnNumber } from "../../utils/functions";
 import supabase from "../../supabase/config";
+import DatePicker from "react-multi-date-picker";
+import "react-multi-date-picker/styles/colors/purple.css";
 
 const AddNewExam = () => {
   const inputDateRef = useRef();
@@ -13,6 +15,7 @@ const AddNewExam = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [classData, setClassData] = useState([]);
   const [collapsedSections, setCollapsedSections] = useState([]);
+  const [dates, setDates] = useState([]);
 
   // Date input control
   const handleDateClick = () => {
@@ -139,6 +142,15 @@ const AddNewExam = () => {
                     </div>
                   </Button>
                 ))}
+
+                <DatePicker
+                  multiple
+                  value={dates}
+                  onChange={setDates}
+                  format="YYYY-MM-DD"
+                  calendarPosition="bottom-center"
+                  className="purple"
+                />
 
                 <Button
                   className="w-full text-gray-500"
