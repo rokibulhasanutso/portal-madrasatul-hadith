@@ -76,7 +76,7 @@ const ResultUpdatePage = () => {
     setLoading((prev) => ({ ...prev, students: true }));
 
     const { data, error } = await supabase
-      .from("resultTest")
+      .from(import.meta.env.VITE_RESULT_TABLE_NAME)
       .select(`id, ${subjectCode}`)
       .in("id", ids)
       .order("id", { ascending: true });
@@ -121,7 +121,7 @@ const ResultUpdatePage = () => {
     });
 
     const { data, error } = await supabase
-      .from("resultTest")
+      .from(import.meta.env.VITE_RESULT_TABLE_NAME)
       .upsert(query)
       .select();
 

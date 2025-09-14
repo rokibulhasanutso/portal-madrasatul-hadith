@@ -59,7 +59,7 @@ const ResultPage = () => {
         return;
       }
 
-      const { data, error } = await supabase.from("resultTest").select(`
+      const { data, error } = await supabase.from(import.meta.env.VITE_RESULT_TABLE_NAME).select(`
         id,
         ${subjectCodes.join(",")},
         students (

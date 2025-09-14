@@ -2,7 +2,7 @@ import React from "react";
 import { enToBnNumber } from "../utils/functions";
 import { secondTermExamRoutine } from "../static/SecondTermExamRoutine";
 import { QRCodeCanvas, QRCodeSVG } from "qrcode.react";
-import { Star, StarOff } from "lucide-react";
+// import { Star, StarOff } from "lucide-react";
 
 const ExamAdmitCard = ({ data }) => {
   function rearrangeAndGroupArray(array, groupSize = 2) {
@@ -44,7 +44,7 @@ const ExamAdmitCard = ({ data }) => {
           <div className="text-center col-span-2">
             <h1 className="font-galada text-[26px]">মাদ্‌রাসাতুল হাদিস</h1>
             {/* <h6 className="text-sm">পুঠিয়াড় পাড়, সরিষাবাড়ী, জামালপুর।</h6> */}
-            <p className="leading-normal">দ্বিতীয় সাময়িক পরীক্ষা - ২০২৫ ইং</p>
+            <p className="leading-normal">তৃতীয় সাময়িক পরীক্ষা - ২০২৫ ইং</p>
           </div>
 
           <div className="size-16 mx-2.5 p-1 justify-self-end">

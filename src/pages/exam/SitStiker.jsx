@@ -80,7 +80,7 @@ const SitStiker = () => {
                     মাদ্‌রাসাতুল হাদিস
                   </p>
                   <p className="text-center text-sm font-bangla">
-                    দ্বিতীয় সাময়িক পরীক্ষা - ২০২৫ইং
+                    তৃতীয় সাময়িক পরীক্ষা - ২০২৫ইং
                   </p>
                 </div>
 

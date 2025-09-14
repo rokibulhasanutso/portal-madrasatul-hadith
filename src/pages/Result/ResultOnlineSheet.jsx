@@ -6,7 +6,7 @@ const ResultOnlineSheet = () => {
 
   const getAllResults = async () => {
     const { data, error } = await supabase
-      .from("resultTest")
+      .from(import.meta.env.VITE_RESULT_TABLE_NAME)
       .select(
         `*, students (id, studentName, roll, classes (classLabel, class_code), studentImage)`
       )
