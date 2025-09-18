@@ -119,6 +119,8 @@ const ResultPage = () => {
     elementName: ".sheet",
   });
 
+  console.log(subjectWaysUpdateResult)
+
   return (
     <BackgroundBlurWrapper>
       <div>

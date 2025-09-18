@@ -14,7 +14,7 @@ const useResultsData = ({ idParam, classCodeParam, rollParams } = {}) => {
     setLoading(true);
 
     const { data: resultData, error } = await supabase
-      .from("resultTest")
+      .from(import.meta.env.VITE_RESULT_TABLE_NAME)
       .select(
         `id, created_at,
          students(id, studentName, roll, studentImage, classes(classLabel, class_code)),
