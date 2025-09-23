@@ -108,7 +108,7 @@ const ResultPage = () => {
   const { data: resultData, loading: resultLoading } = useResultsData();
   const { downloadPdf, loading: sheetDownloadLoading } = usePdfDownloader({
     sheetData: {
-      sheetName: `দ্বিতীয় সাময়িক পরীক্ষা ২০২৫ইং - ${
+      sheetName: `তৃতীয় সাময়িক পরীক্ষা ২০২৫ইং - ${
         classData?.[selectedForResult.class - 1]?.classLabel || "সকল"
       } শ্রেণী${
         selectedForResult.roll
@@ -305,7 +305,7 @@ const ResultPage = () => {
                         >
                           <ResultMarkSheetTemplate
                             sheetName={"sheet"}
-                            examName="দ্বিতীয় সাময়িক পরীক্ষা - ২০২৫ইং"
+                            examName="তৃতীয় সাময়িক পরীক্ষা - ২০২৫ইং"
                             data={item}
                           />
                         </div>
