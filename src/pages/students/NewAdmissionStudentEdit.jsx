@@ -33,7 +33,7 @@ const NewAdmissionStudentEdit = () => {
   const updateData = async (updateData) => {
     // console.log(updateData);
     const { data, error } = await supabase
-      .from("students")
+      .from("new-admission")
       .upsert({ id: studentID, ...updateData })
       .select()
       .single();
@@ -42,7 +42,7 @@ const NewAdmissionStudentEdit = () => {
       console.log(error);
     }
     if (data) {
-      navigate(`/students/${data.class_code}/${studentID}`);
+      navigate(`/admission/student/${studentID}`);
     }
   };
 

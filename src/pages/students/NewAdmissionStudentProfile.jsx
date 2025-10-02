@@ -141,9 +141,9 @@ const NewAdmissionStudentProfile = () => {
                   <td>জন্ম তারিখঃ</td>
                   <td>{data.dob}</td>
                 </tr>
-                <tr className="font-sans">
+                <tr>
                   <td>জন্ম নিবন্ধন নম্বরঃ</td>
-                  <td>{data.birthNumber}</td>
+                  <td className="font-sans">{data.birthNumber}</td>
                 </tr>
                 <tr>
                   <td>জেলাঃ</td>
