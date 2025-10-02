@@ -33,6 +33,9 @@ import MakeQuestion from "./pages/make_questions/MakeQuestion";
 import ResultMarkSheet from "./pages/Result/ResultMarkSheet";
 import AdjustSheet from "./pages/test/AdjustSheet";
 import CenterExaminationStudentListingSheet from "./pages/test/CenterExaminationStudentListingSheet";
+import NewAdmissionStudentProfile from "./pages/students/NewAdmissionStudentProfile";
+import NewAdmissionStudentList from "./pages/students/NewAdmissionStudentList";
+import NewAdmissionStudentEdit from "./pages/students/NewAdmissionStudentEdit";
 
 const App = () => {
   return (
@@ -48,6 +51,20 @@ const App = () => {
         }
       >
         <Route index element={<HomePage />} />
+
+        {/* admissions route */}
+        <Route path="admission">
+          <Route index element={<NewAdmissionStudentList />} />
+          <Route path="new" element={<StudentAddPage />} />
+          <Route
+            path="student/:student_id"
+            element={<NewAdmissionStudentProfile />}
+          />
+          <Route
+            path="student/edit/:student_id"
+            element={<NewAdmissionStudentEdit />}
+          />
+        </Route>
 
         {/* teachers route */}
         <Route path="teachers">

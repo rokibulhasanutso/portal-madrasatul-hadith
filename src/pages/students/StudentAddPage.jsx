@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import StudentForm from "../../components/StudentForm";
 import supabase from "../../supabase/config";
 import { useNavigate } from "react-router-dom";
+import { Loader, Loader2 } from "lucide-react";
 
 const StudentAddPage = () => {
-  // const [submitData, setSubmitData] = useState({});
   const navigate = useNavigate();
+  const [submissionLoading, setSubmissionLoading] = useState(false);
 
   const handleSubmit = async (insertData) => {
-    // console.log(updateData);
+    setSubmissionLoading(true);
+
     const { data, error } = await supabase
-      .from("students")
+      .from("new-admission")
       .insert([insertData])
       .select();
 
@@ -18,11 +20,10 @@ const StudentAddPage = () => {
       console.log(error);
     }
     if (data) {
-      // navigate(`/students/${data.class_code}/${data.id}`);
-      console.log("ok");
+      navigate(`/admission/student/${data[0].id}`);
     }
 
-    console.log(data, error, insertData);
+    setSubmissionLoading(false);
   };
   return (
     <>
@@ -30,7 +31,16 @@ const StudentAddPage = () => {
         <h1 className="text-2xl text-center my-8">
           নতুন শিক্ষার্থী ভর্তি ফর্ম
         </h1>
-        <StudentForm onSubmit={(value) => handleSubmit(value)} />
+
+        {submissionLoading && (
+          <p className="text-center flex justify-center items-center">
+            <Loader2 className="mr-4 animate-spin" /> অপেক্ষা করুন...
+          </p>
+        )}
+
+        {!submissionLoading && (
+          <StudentForm onSubmit={(value) => handleSubmit(value)} />
+        )}
       </div>
     </>
   );

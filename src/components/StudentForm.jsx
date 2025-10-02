@@ -9,6 +9,8 @@ const StudentForm = ({
   defaultValue = {},
   onSubmit = () => null,
   imageUploadOptionDisable = false,
+  bucketName = "student-image",
+  tableName = "students",
 }) => {
   const fileInputRef = useRef(null);
 
@@ -62,7 +64,7 @@ const StudentForm = ({
     const file = event.target.files[0];
 
     if (file) {
-      handleImageUpload(file, "student-image", defaultValue?.id);
+      handleImageUpload(file, bucketName, defaultValue?.id);
     }
   };
 
@@ -73,7 +75,7 @@ const StudentForm = ({
 
   const handleSetImageUrl = async (url) => {
     const { data, error } = await supabase
-      .from("students")
+      .from(tableName)
       .upsert({ id: defaultValue.id, studentImage: url })
       .select();
   };

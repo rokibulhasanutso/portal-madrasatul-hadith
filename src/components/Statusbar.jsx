@@ -88,6 +88,40 @@ const Statusbar = () => {
           </div>
         </div>
       </Link>
+
+      {/* cate 6 */}
+      <Link to={"/admission/new"}>
+        <div className="space-y-2">
+          <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
+            <img
+              src="/assets/new-admission.png"
+              className="size-[95%]"
+              alt="Teacher Image"
+            />
+          </div>
+          <div className="text-center text-sm font-bangla ">
+            <p>নতুন ভর্তি</p>
+            {/* <p>৫/৭</p> */}
+          </div>
+        </div>
+      </Link>
+
+      {/* cate 7 */}
+      <Link to={"/admission"}>
+        <div className="space-y-2">
+          <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
+            <img
+              src="/assets/new-admission.png"
+              className="size-[95%]"
+              alt="Teacher Image"
+            />
+          </div>
+          <div className="text-center text-sm font-bangla ">
+            <p>নতুন ভর্তিকৃত শিক্ষার্থী সমূহ</p>
+            {/* <p>৫/৭</p> */}
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };
