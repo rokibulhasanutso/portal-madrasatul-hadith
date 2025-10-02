@@ -19,6 +19,7 @@ const StudentForm = ({
     roll: defaultValue.roll || "",
     class_code: defaultValue.class_code || "",
     dob: defaultValue.dob || "",
+    birthNumber: defaultValue.birthNumber || "",
     gender: defaultValue.gender || "",
     fatherName: defaultValue.fatherName || "",
     motherName: defaultValue.motherName || "",
@@ -143,6 +144,13 @@ const StudentForm = ({
             value={formData.dob}
             defaultValue={defaultValue.dob}
             onChange={handleChange("dob")}
+          />
+          <TextInput
+            placeholder="জন্ম নিবন্ধন নম্বর"
+            inputClassName="rounded-lg"
+            value={formData.birthNumber}
+            defaultValue={defaultValue.birthNumber}
+            onChange={handleChange("birthNumber")}
           />
           <TextInput
             placeholder="লিঙ্গ (ছেলে/মেয়ে/অন্যান্য)"

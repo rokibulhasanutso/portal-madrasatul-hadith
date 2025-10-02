@@ -141,6 +141,10 @@ const NewAdmissionStudentProfile = () => {
                   <td>জন্ম তারিখঃ</td>
                   <td>{data.dob}</td>
                 </tr>
+                <tr className="font-sans">
+                  <td>জন্ম নিবন্ধন নম্বরঃ</td>
+                  <td>{data.birthNumber}</td>
+                </tr>
                 <tr>
                   <td>জেলাঃ</td>
                   <td>{data.district}</td>
