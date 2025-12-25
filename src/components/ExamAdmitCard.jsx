@@ -30,7 +30,7 @@ const ExamAdmitCard = ({ data }) => {
 
   return (
     <>
-      <div className="relative background-area h-1/2 bg-cover px-14 py-12 font-bangla border-b border-dashed border-gray-300">
+      <div className={`relative background-area h-1/2 bg-cover px-14 py-12 font-bangla border-b border-dashed border-gray-300 id-${data?.id}`}>
         {/* <div className="grid grid-cols-4 place-content-center  p-2 border-b-2 border-[#f9d7d7] bg-[#ffe8e8]"> */}
         <div className="grid grid-cols-4 place-content-center  p-2 border-b-2 border-[#fbbdbd] bg-[#ffd3d3]">
           <div className="size-16 mx-2.5 p-1">
@@ -44,7 +44,7 @@ const ExamAdmitCard = ({ data }) => {
           <div className="text-center col-span-2">
             <h1 className="font-galada text-[26px]">মাদ্‌রাসাতুল হাদিস</h1>
             {/* <h6 className="text-sm">পুঠিয়াড় পাড়, সরিষাবাড়ী, জামালপুর।</h6> */}
-            <p className="leading-normal">তৃতীয় সাময়িক পরীক্ষা - ২০২৫ ইং</p>
+            <p className="leading-normal">বার্ষিক পরীক্ষা - ২০২৫ ইং</p>
           </div>
 
           <div className="size-16 mx-2.5 p-1 justify-self-end">

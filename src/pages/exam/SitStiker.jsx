@@ -80,13 +80,13 @@ const SitStiker = () => {
                     মাদ্‌রাসাতুল হাদিস
                   </p>
                   <p className="text-center text-sm font-bangla">
-                    তৃতীয় সাময়িক পরীক্ষা - ২০২৫ইং
+                    বার্ষিক পরীক্ষা - ২০২৫ইং
                   </p>
                 </div>
 
                 {/* student info */}
                 <div className="mx-3 my-4 text-xl text-center">
-                  <p className="text-[22px] my-2">নামঃ {data.studentName}</p>
+                  <p className="text-[22px] my-2 text-nowrap">নামঃ {data.studentName}</p>
                   <div className="flex justify-between">
                     <p>শ্রেণীঃ {data.classes.classLabel}</p>
                     <p>

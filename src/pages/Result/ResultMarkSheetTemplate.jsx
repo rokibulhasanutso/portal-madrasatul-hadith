@@ -1,6 +1,9 @@
 import { enToBnNumber, getBanglaPosition } from "../../utils/functions";
 
 const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
+
+  console.log(data);
+
   return (
     <div
       className={`${sheetName} bg-[url(/assets/pattern-image/pattern-1.jpg)] p-9 bg-center bg-cover grayscale-100 contrast-100`}
@@ -120,6 +123,17 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
                       <td>{data.grade}</td>
                     </tr>
                   ))}
+
+                  <tr>
+                    <td colSpan={5} className="px-3">অতিরিক্ত নাম্বার</td>
+                  </tr>
+                  <tr className="*:border text-center ">
+                    <td>১০</td>
+                    <td className="px-4 text-left">হাজিরা নাম্বার</td>
+                    <td>২৫</td>
+                    <td>২৩</td>
+                    <td>A+</td>
+                  </tr>
 
                   {/* total result table */}
                   <tr className="*:border text-center ">

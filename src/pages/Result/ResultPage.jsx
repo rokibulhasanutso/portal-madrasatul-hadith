@@ -108,7 +108,7 @@ const ResultPage = () => {
   const { data: resultData, loading: resultLoading } = useResultsData();
   const { downloadPdf, loading: sheetDownloadLoading } = usePdfDownloader({
     sheetData: {
-      sheetName: `তৃতীয় সাময়িক পরীক্ষা ২০২৫ইং - ${
+      sheetName: `বার্ষিক পরীক্ষা ২০২৫ইং - ${
         classData?.[selectedForResult.class - 1]?.classLabel || "সকল"
       } শ্রেণী${
         selectedForResult.roll
@@ -119,7 +119,7 @@ const ResultPage = () => {
     elementName: ".sheet",
   });
 
-  console.log(subjectWaysUpdateResult)
+  // console.log(subjectWaysUpdateResult)
 
   return (
     <BackgroundBlurWrapper>
@@ -305,7 +305,7 @@ const ResultPage = () => {
                         >
                           <ResultMarkSheetTemplate
                             sheetName={"sheet"}
-                            examName="তৃতীয় সাময়িক পরীক্ষা - ২০২৫ইং"
+                            examName="বার্ষিক পরীক্ষা - ২০২৫ইং"
                             data={item}
                           />
                         </div>

@@ -50,6 +50,10 @@ const ResultUpdatePage = () => {
   const handleTabReset = () => setTab(tabObjects);
 
   const [query, setQuery] = useState([]);
+  const [attendenceAccount, setAttendenceAccount] = useState([]);
+
+  // console.log(query);
+  // console.log(attendenceAccount);
 
   const getStudents = async () => {
     setLoading((prev) => ({ ...prev, students: true }));
@@ -75,6 +79,20 @@ const ResultUpdatePage = () => {
   const getResults = async (ids) => {
     setLoading((prev) => ({ ...prev, students: true }));
 
+    if (parseInt(subjectCode) === 100) {
+      const { data, error } = await supabase
+        .from("attendence")
+        .select(`id, present,present_percentage, absent`)
+        .in("id", ids)
+        .order("id", { ascending: true });
+
+      setAttendenceAccount(data);
+
+      if (error) {
+        console.log(error);
+      }
+    }
+
     const { data, error } = await supabase
       .from(import.meta.env.VITE_RESULT_TABLE_NAME)
       .select(`id, ${subjectCode}`)
@@ -96,17 +114,62 @@ const ResultUpdatePage = () => {
     getStudents();
   }, []);
 
-  const handleUpdateData = (studentId, subjectCode, marks) => {
+  const handleUpdateData = (studentId, subjectCode, getMarks) => {
     // console.log("call", studentId, subjectCode, marks);
+    let marks = 0;
+    const workingDay = 283;
+    const attendenceFullMarks = 25;
+    let attendenceDay = 0,
+      attendancePercentage = 0,
+      attendenceMark = 0;
+
+    // In case for creating attendence number
+    if (parseInt(subjectCode) === 100) {
+      attendenceDay = workingDay - getMarks;
+      attendancePercentage = (100 / workingDay) * attendenceDay;
+      attendenceMark = attendenceFullMarks * (attendancePercentage / 100);
+
+      marks = attendenceMark;
+    } else {
+      marks = getMarks;
+    }
+
     const index = query.findIndex((item) => item.id === studentId);
 
     if (index !== -1) {
+      // for attendence data
+      if (parseInt(subjectCode) === 100) {
+        const updatedAttendence = attendenceAccount.map((item) =>
+          item.id === studentId
+            ? {
+                id: studentId,
+                present: attendenceDay,
+                present_percentage: attendancePercentage,
+                absent: getMarks, // getMarks mean get input absent instead marks
+              }
+            : item
+        );
+
+        setAttendenceAccount(updatedAttendence);
+      }
+
       // ✅ If item exists: update
       const updatedData = query.map((item) =>
         item.id === studentId ? { ...item, [subjectCode]: marks } : item
       );
       setQuery(updatedData);
     } else {
+      if (parseInt(subjectCode) === 100) {
+        const addNewAttendence = {
+          id: studentId,
+          present: attendenceDay,
+          present_percentage: attendancePercentage,
+          absent: getMarks,
+        };
+
+        setAttendenceAccount((prev) => [...prev, addNewAttendence]);
+      }
+
       // ✅ If item doesn't exist: insert new
       const newItem = { id: studentId, [subjectCode]: marks };
       setQuery((prev) => [...prev, newItem]);
@@ -119,6 +182,19 @@ const ResultUpdatePage = () => {
       open: true,
       loading: true,
     });
+
+    if (parseInt(subjectCode) === 100) {
+      const { error } = await supabase
+        .from("attendence")
+        .upsert(attendenceAccount)
+        .select();
+
+      if (error) {
+        handleTab({ error: true });
+        handleTab({ loading: false });
+        return;
+      }
+    }
 
     const { data, error } = await supabase
       .from(import.meta.env.VITE_RESULT_TABLE_NAME)
@@ -259,7 +335,7 @@ const ResultUpdatePage = () => {
                     <td>প্রাপ্ত নম্বর</td>
                   </tr>
                   {data.students.map((data) => (
-                    <tr className="text-center">
+                    <tr key={data.id} className="text-center">
                       <td>{enToBnNumber(data.roll)}</td>
                       <td className="px-0.5">
                         <div className="size-12">
@@ -301,22 +377,73 @@ const ResultUpdatePage = () => {
                     <p className="bg-gray-800 rounded-full ring-2 ring-gray-700 size-10 flex justify-center items-center">
                       {enToBnNumber(data.roll)}
                     </p>
-                    <div className="size-12">
-                      <img
-                        src={
-                          data?.studentImage ||
-                          "https://cdn-icons-png.flaticon.com/512/12225/12225935.png"
-                        }
-                        alt="Student Image"
-                        className="size-full bg-cover bg-top rounded"
-                      />
+                    <div
+                      className={
+                        parseInt(subjectCode) === 100 ? `space-y-3` : ""
+                      }
+                    >
+                      <div className="flex gap-3 items-center">
+                        <div className="size-12">
+                          <img
+                            src={
+                              data?.studentImage ||
+                              "https://cdn-icons-png.flaticon.com/512/12225/12225935.png"
+                            }
+                            alt="Student Image"
+                            className="size-full bg-cover bg-top rounded"
+                          />
+                        </div>
+                        <p className="*:block">
+                          <span className="text-lg">{data.studentName}</span>
+                          {parseInt(subjectCode) === 100 ? (
+                            <>
+                              <span className="text-base">
+                                প্রাপ্ত নাম্বারঃ{" "}
+                                {enToBnNumber(
+                                  parseFloat(
+                                    query.find((item) => item.id === data.id)?.[
+                                      subjectCode
+                                    ] || 0
+                                  ).toFixed(2)
+                                )}
+                              </span>
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </p>
+                      </div>
+                      <p className="*:block">
+                        {/* <span className="text-lg">{data.studentName}</span> */}
+                        {parseInt(subjectCode) === 100 ? (
+                          <>
+                            <span className="text-base">
+                              কার্যদিবসঃ {enToBnNumber(283)}দিন
+                            </span>
+                            <span className="text-base">
+                              উপস্থিতিঃ{" "}
+                              {enToBnNumber(
+                                attendenceAccount.find(
+                                  (item) => item.id === data.id
+                                )?.present || 0
+                              )}
+                              দিন
+                            </span>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </p>
                     </div>
-                    <p className="*:block">
-                      <span className="text-lg">{data.studentName}</span>
-                      {/* <span className="text-base">উপস্থিতিঃ ০%</span> */}
-                    </p>
                   </div>
-                  <div>
+                  <div className="flex flex-col justify-center gap-2">
+                    {parseInt(subjectCode) === 100 ? (
+                      <>
+                        <span className="text-base block">অনুপস্থিতিঃ</span>
+                      </>
+                    ) : (
+                      ""
+                    )}
                     <TextInput
                       className={"my-0"}
                       type="number"
@@ -325,9 +452,13 @@ const ResultUpdatePage = () => {
                       }
                       placeholder={"00"}
                       defaultValue={
-                        query.find((item) => item.id === data.id)?.[
-                          subjectCode
-                        ] || ""
+                        parseInt(subjectCode) === 100
+                          ? attendenceAccount.find(
+                              (item) => item.id === data.id
+                            )?.absent || ""
+                          : query.find((item) => item.id === data.id)?.[
+                              subjectCode
+                            ] || ""
                       }
                       onChange={(e) =>
                         handleUpdateData(

@@ -48,6 +48,22 @@
     z-index: -1;
     opacity: 0.225;
   }
+
+  .background-logo-demo::after {
+    content: "";
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    width: 215px;
+    height: 215px;
+    background: url('/assets/demo-logo.png') no-repeat center;
+    background-size: cover;
+    transform: translate(-50%, -50%); 
+    /* z-index: -1; */
+    /* opacity: 0.1;  */
+    z-index: -1;
+    opacity: 0.225;
+  }
   .background-area::before {
     content: "";
     position: absolute;

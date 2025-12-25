@@ -36,6 +36,7 @@ import CenterExaminationStudentListingSheet from "./pages/test/CenterExamination
 import NewAdmissionStudentProfile from "./pages/students/NewAdmissionStudentProfile";
 import NewAdmissionStudentList from "./pages/students/NewAdmissionStudentList";
 import NewAdmissionStudentEdit from "./pages/students/NewAdmissionStudentEdit";
+import RoutineModelTest from "./pages/test/RoutineModelTest";
 
 const App = () => {
   return (
@@ -132,6 +133,7 @@ const App = () => {
           path="center-exam"
           element={<CenterExaminationStudentListingSheet />}
         />
+        <Route path="routine-model" element={<RoutineModelTest />} />
       </Route>
     </Routes>
   );
