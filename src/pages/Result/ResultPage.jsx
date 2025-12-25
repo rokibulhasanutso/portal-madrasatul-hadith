@@ -35,6 +35,7 @@ const ResultPage = () => {
   });
 
   const [subjectWaysUpdateResult, setSubjectWaysUpdateResult] = useState({});
+  const [mainResultData, setMainResultData] = useState({});
 
   const getClassList = async () => {
     const { data, error } = await supabase.from("classes").select("*");
@@ -59,7 +60,9 @@ const ResultPage = () => {
         return;
       }
 
-      const { data, error } = await supabase.from(import.meta.env.VITE_RESULT_TABLE_NAME).select(`
+      const { data, error } = await supabase.from(
+        import.meta.env.VITE_RESULT_TABLE_NAME
+      ).select(`
         id,
         ${subjectCodes.join(",")},
         students (
@@ -119,7 +122,21 @@ const ResultPage = () => {
     elementName: ".sheet",
   });
 
-  // console.log(subjectWaysUpdateResult)
+  useEffect(() => {
+    const getattendence = async () => {
+      const { data } = await supabase.from("attendence").select("*");
+
+      const mainData = resultData
+        .map((a1) => {
+          const match = data.find((a2) => a2.id === a1.id);
+          return match ? { ...a1, ...match } : null;
+        })
+        .filter(Boolean);
+
+      setMainResultData(mainData);
+    };
+    getattendence();
+  }, [resultData]);
 
   return (
     <BackgroundBlurWrapper>
@@ -283,7 +300,7 @@ const ResultPage = () => {
                   </div>
                 ) : (
                   <AdjustSheetMobileScreen>
-                    {resultData
+                    {mainResultData
                       ?.filter((student) => {
                         const { class: class_code, roll } = selectedForResult;
 

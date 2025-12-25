@@ -2,8 +2,6 @@ import { enToBnNumber, getBanglaPosition } from "../../utils/functions";
 
 const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
 
-  console.log(data);
-
   return (
     <div
       className={`${sheetName} bg-[url(/assets/pattern-image/pattern-1.jpg)] p-9 bg-center bg-cover grayscale-100 contrast-100`}
@@ -44,7 +42,9 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
                     </tr>
                     <tr>
                       <td>প্রাপ্ত মোট নম্বরঃ</td>
-                      <td>{enToBnNumber(data?.total_obtained_marks)}</td>
+                      <td>
+                        {enToBnNumber(data?.total_obtained_marks.toFixed(2))}
+                      </td>
                     </tr>
                     <tr>
                       <td>প্রাপ্ত গ্রেডঃ</td>
@@ -114,25 +114,37 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.results?.map((data, index) => (
-                    <tr key={index} className="*:border text-center ">
-                      <td>{enToBnNumber(index + 1)}</td>
-                      <td className="px-4 text-left">{data?.sub_name}</td>
-                      <td>{enToBnNumber(data?.full_marks)}</td>
-                      <td>{enToBnNumber(data?.obtained_marks)}</td>
-                      <td>{data.grade}</td>
-                    </tr>
-                  ))}
+                  {data?.results
+                    ?.filter((data) => parseInt(data.sub_code) !== 100)
+                    .map((data, index) => (
+                      <tr key={index} className="*:border text-center *:leading-none">
+                        <td>{enToBnNumber(index + 1)}</td>
+                        <td className="px-4 text-left">{data?.sub_name}</td>
+                        <td>{enToBnNumber(data?.full_marks)}</td>
+                        <td>{enToBnNumber(data?.obtained_marks)}</td>
+                        <td>{data.grade}</td>
+                      </tr>
+                    ))}
 
                   <tr>
-                    <td colSpan={5} className="px-3">অতিরিক্ত নাম্বার</td>
+                    <td colSpan={5} className="px-3 leading-none">
+                      অতিরিক্ত নাম্বার
+                    </td>
                   </tr>
                   <tr className="*:border text-center ">
-                    <td>১০</td>
-                    <td className="px-4 text-left">হাজিরা নাম্বার</td>
-                    <td>২৫</td>
-                    <td>২৩</td>
-                    <td>A+</td>
+                    <td>{enToBnNumber(data?.results.length)}</td>
+                    <td className="px-4 py-0 text-left flex border-none **:border-none">
+                      <span>হাজিরা নাম্বার</span>
+                      <span className="pl-5 !py-0 border-none *:block">
+                        <span className="p-0 leading-none">উপস্থিতিঃ {enToBnNumber(data?.present)} দিন</span>
+                        <span className="p-0 leading-none">অনুপস্থিতিঃ {enToBnNumber(data?.absent)} দিন</span>
+                      </span>
+                    </td>
+                    <td>{enToBnNumber(data?.results[0].full_marks)}</td>
+                    <td>
+                      {enToBnNumber(data?.results[0].obtained_marks.toFixed(2))}
+                    </td>
+                    <td>{data?.results[0].grade}</td>
                   </tr>
 
                   {/* total result table */}
@@ -142,7 +154,9 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
                       className="!border-l-transparent !border-b-transparent"
                     />
                     <td>{enToBnNumber(data?.total_full_marks)}</td>
-                    <td>{enToBnNumber(data?.total_obtained_marks)}</td>
+                    <td>
+                      {enToBnNumber(data?.total_obtained_marks.toFixed(2))}
+                    </td>
                     <td>{data?.grade}</td>
                   </tr>
                 </tbody>
