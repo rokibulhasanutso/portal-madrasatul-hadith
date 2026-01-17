@@ -20,7 +20,7 @@ const StudentListPage = () => {
       .from("students")
       .select("id, studentName, roll, studentImage")
       .eq("class_code", classcode)
-      .order("id", "desc");
+      .order("roll", "desc");
 
     const { data: classLabel, error: classError } = await supabase
       .from("classes")

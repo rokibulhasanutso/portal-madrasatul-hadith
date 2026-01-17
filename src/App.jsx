@@ -37,8 +37,33 @@ import NewAdmissionStudentProfile from "./pages/students/NewAdmissionStudentProf
 import NewAdmissionStudentList from "./pages/students/NewAdmissionStudentList";
 import NewAdmissionStudentEdit from "./pages/students/NewAdmissionStudentEdit";
 import RoutineModelTest from "./pages/test/RoutineModelTest";
+import useResultsData from "./hook/useResultsData";
+import { useEffect } from "react";
+import supabase from "./supabase/config";
 
 const App = () => {
+  // const { data: resultData, loading: resultLoading } = useResultsData();
+
+  // const updateRollBaseResultPosition = async () => {
+  //   const student = await supabase
+  //     .from("students")
+  //     .select("*")
+  //     .order("roll", "desc");
+
+  //   // const func = resultData.map((item) => {});
+
+  //   // const studentdata = await supabase.from("students").upsert(func).select();
+
+  //   console.log(resultData);
+  // };
+
+  // // useEffect(() => {
+  // //   // console.log(resultLoading);
+  // //   // if (resultLoading) {
+  //   updateRollBaseResultPosition();
+  // //   // }
+  // // }, [resultLoading]);
+
   return (
     <Routes>
       <Route path="/auth" element={<AuthLayout />} />

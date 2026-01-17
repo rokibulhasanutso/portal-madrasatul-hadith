@@ -12,7 +12,7 @@ const StudentAddPage = () => {
     setSubmissionLoading(true);
 
     const { data, error } = await supabase
-      .from("new-admission")
+      .from("students")
       .insert([insertData])
       .select();
 
@@ -20,7 +20,7 @@ const StudentAddPage = () => {
       console.log(error);
     }
     if (data) {
-      navigate(`/admission/student/${data[0].id}`);
+      navigate(`/students/${data[0].class_code}/${data[0].id}`);
     }
 
     setSubmissionLoading(false);
