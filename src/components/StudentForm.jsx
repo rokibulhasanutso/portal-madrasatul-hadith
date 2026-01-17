@@ -4,6 +4,7 @@ import { Loader, Plus } from "lucide-react";
 import { filterValidObject } from "../utils/functions";
 import useImageUpload from "../hook/useImageUpload";
 import supabase from "../supabase/config";
+import SelectInput from "./SelectInput";
 
 const StudentForm = ({
   defaultValue = {},
@@ -86,6 +87,25 @@ const StudentForm = ({
       handleSetImageUrl(uploadedUrl);
     }
   }, [uploadedUrl]);
+
+  const [classData, setClassData] = useState([]);
+  const [selectedData, setSelectedData] = useState({
+    subject_code: null,
+    class_code: null,
+  });
+
+  const getClassList = async () => {
+    const { data, error } = await supabase.from("classes").select("*");
+    if (error) {
+      console.error(error);
+      return;
+    }
+    setClassData(data);
+  };
+
+  useEffect(() => {
+    getClassList();
+  }, []);
 
   return (
     <>
@@ -236,13 +256,43 @@ const StudentForm = ({
             defaultValue={defaultValue.roll}
             onChange={handleChange("roll")}
           />
-          <TextInput
+          {/* <TextInput
             placeholder="ক্লাস কোড"
             inputClassName="rounded-lg"
             value={formData.class_code}
             defaultValue={defaultValue.class_code}
             onChange={handleChange("class_code")}
-          />
+          /> */}
+
+          <SelectInput
+            className={`*:odd:bg-gray-800 *:my-1.5 text-left ${
+              selectedData.class_code || defaultValue.class_code
+                ? ""
+                : "text-gray-400 *:text-white"
+            }`}
+            firstOption={{
+              value: null,
+              label: "শ্রেণী",
+            }}
+            onChange={(e) => {
+              setSelectedData((prev) => ({
+                ...prev,
+                class_code: parseInt(e.target.value),
+              }));
+              // handleChange("class_code");
+              setFormData({ ...formData, ["class_code"]: e.target.value });
+            }}
+          >
+            {classData.map((data, index) => (
+              <option
+                key={index}
+                value={data.class_code}
+                selected={defaultValue.class_code === data.class_code}
+              >
+                {data.classLabel}
+              </option>
+            ))}
+          </SelectInput>
         </div>
 
         {/* guardian info */}
