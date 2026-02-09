@@ -29,7 +29,7 @@ const StudentAddPage = () => {
     <>
       <div className="area-wrapper bg-content-blur font-bangla text-lg">
         <h1 className="text-2xl text-center my-8">
-          নতুন শিক্ষার্থী ভর্তি ফর্ম
+          নতুন শিক্ষার্থী ফর্ম
         </h1>
 
         {submissionLoading && (

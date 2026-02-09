@@ -5,7 +5,7 @@ const Statusbar = () => {
   return (
     <div className="w-full bg-gray-800/75 backdrop-blur-xs rounded-2xl p-4 font-bangla grid grid-cols-4 gap-y-4 justify-between">
       {/* cate 1 */}
-      <Link to={"/teachers"}>
+      {/* <Link to={"/teachers"}>
         <div className="space-y-2">
           <div className="size-14 rounded-full overflow-hidden mx-auto bg-white">
             <img
@@ -19,7 +19,7 @@ const Statusbar = () => {
             <p>৫/৭</p>
           </div>
         </div>
-      </Link>
+      </Link> */}
 
       {/* cate 2 */}
       <Link to={"/students"}>
@@ -33,13 +33,13 @@ const Statusbar = () => {
           </div>
           <div className="text-center text-sm font-bangla ">
             <p>শিক্ষার্থী</p>
-            <p>১৩৩/১৫৩</p>
+            <p>১৬৭ জন</p>
           </div>
         </div>
       </Link>
 
       {/* cate 3 */}
-      <Link to={"/exams"}>
+      {/* <Link to={"/exams"}>
         <div className="space-y-2">
           <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
             <img
@@ -50,13 +50,13 @@ const Statusbar = () => {
           </div>
           <div className="text-center text-sm font-bangla ">
             <p>পরীক্ষা সংক্রান্ত</p>
-            {/* <p>৫/৭</p> */}
+            <p>৫/৭</p>
           </div>
         </div>
-      </Link>
+      </Link> */}
 
       {/* cate 4 */}
-      <Link to={"/notice"}>
+      {/* <Link to={"/notice"}>
         <div className="space-y-2">
           <div className="size-14 rounded-full overflow-hidden mx-auto">
             <img
@@ -67,13 +67,13 @@ const Statusbar = () => {
           </div>
           <div className="text-center text-sm font-bangla ">
             <p>নোটিশ প্রেরণ</p>
-            {/* <p>৫/৭</p> */}
+            <p>৫/৭</p>
           </div>
         </div>
-      </Link>
+      </Link> */}
 
       {/* cate 5 */}
-      <Link to={"/results"}>
+      {/* <Link to={"/results"}>
         <div className="space-y-2">
           <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
             <img
@@ -84,13 +84,13 @@ const Statusbar = () => {
           </div>
           <div className="text-center text-sm font-bangla ">
             <p>পরীক্ষার ফলাফল</p>
-            {/* <p>৫/৭</p> */}
+            
           </div>
         </div>
-      </Link>
+      </Link> */}
 
       {/* cate 6 */}
-      <Link to={"/admission/new"}>
+      {/* <Link to={"/admission/new"}>
         <div className="space-y-2">
           <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
             <img
@@ -101,13 +101,13 @@ const Statusbar = () => {
           </div>
           <div className="text-center text-sm font-bangla ">
             <p>নতুন ভর্তি</p>
-            {/* <p>৫/৭</p> */}
+            
           </div>
         </div>
-      </Link>
+      </Link> */}
 
       {/* cate 7 */}
-      <Link to={"/admission"}>
+      {/* <Link to={"/admission"}>
         <div className="space-y-2">
           <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
             <img
@@ -118,10 +118,10 @@ const Statusbar = () => {
           </div>
           <div className="text-center text-sm font-bangla ">
             <p>নতুন ভর্তিকৃত শিক্ষার্থী সমূহ</p>
-            {/* <p>৫/৭</p> */}
+            
           </div>
         </div>
-      </Link>
+      </Link> */}
     </div>
   );
 };

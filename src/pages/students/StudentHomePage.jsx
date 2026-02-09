@@ -3,21 +3,43 @@ import { Plus, Search } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../supabase/config";
 import LoadingComponent from "../../components/LoadingComponent";
+import { enToBnNumber } from "./../../utils/functions";
 
 const StudentHomePage = () => {
   const navigate = useNavigate();
+  const [statisticData, setStatisticData] = useState({
+    total_students: 0,
+    total_classes: 0,
+  });
   const [classesData, setClassesData] = useState([]);
   const [classesDataLoading, setClassesDataLoading] = useState(false);
 
   const getAllClasses = async () => {
     setClassesDataLoading(true);
 
-    const { data, error } = await supabase.from("classes").select("*");
+    const { data, error } = await supabase
+      .from("classes")
+      .select("*, total_students:students(count)");
     if (error) {
       console.log(error);
     }
     if (data) {
-      setClassesData(data);
+      const filteredData = data.map((cls) => ({
+        id: cls.id,
+        class_code: cls.class_code,
+        classLabel: cls.classLabel,
+        totalStudents: cls.total_students[0].count,
+      }));
+
+      const statisticCalculation = {
+        total_students: data.reduce((total, cls) => {
+          return total + cls.total_students[0].count;
+        }, 0),
+        total_classes: data.length,
+      };
+
+      setStatisticData(statisticCalculation);
+      setClassesData(filteredData);
     }
 
     setClassesDataLoading(false);
@@ -29,37 +51,36 @@ const StudentHomePage = () => {
 
   return (
     <div className="m-5">
-      {/* Serach students by name */}
-      <div>
-        <form>
-          <div className="ring-2 ring-gray-700 rounded-xl flex items-center p-2 bg-gray-900">
-            <Search className="inline size-7" />
-            <input
-              type="text"
-              placeholder="Search by student name..."
-              className="w-full outline-0 ml-2"
-            />
+      {/* statistic data */}
+      <div className="my-5">
+        <div className="w-full ring-2 ring-gray-700 bg-gray-800/85 backdrop-blur-[6px] rounded-xl p-4 font-bangla">
+          <div>
+            <p className="text-xl">
+              <span>শিক্ষার্থী সংখ্যাঃ</span>{" "}
+              <span>{enToBnNumber(statisticData.total_students)} জন</span>
+            </p>
+            <p className="text-xl">
+              <span>শ্রেণী সংখ্যাঃ</span>{" "}
+              <span>{enToBnNumber(statisticData.total_classes)} টি</span>
+            </p>
           </div>
-        </form>
+
+          <div className="flex justify-end">
+            <button
+              onClick={() => navigate("/students/add")}
+              className="px-2 py-2.5 flex items-center ring-2 ring-gray-700 rounded-xl bg-gray-900"
+            >
+              <Plus />
+              <span className="px-2">নতুন শিক্ষার্থী যুক্ত করুন</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* acction buttons */}
-      <div className="flex justify-end my-4 font-bangla">
-        <button
-          onClick={() => navigate("/students/add")}
-          className="px-2 py-2.5 flex items-center ring-2 ring-gray-700 rounded-xl bg-gray-900"
-        >
-          <Plus />
-          <span className="px-2">নতুন শিক্ষার্থী যুক্ত করুণ</span>
-        </button>
-      </div>
-
+      {/* classes contents */}
       <LoadingComponent loadingState={classesDataLoading}>
-        {/* classes contents */}
-        <div className="my-5 mt-10">
-          {/* <p className="my-2 text-lg font-medium font-bangla">সকল শ্রেণী সমূহ</p> */}
-
-          <div className="space-y-4">
+        <div className="my-5">
+          <div className="grid grid-cols-2 gap-5">
             {classesData?.map((data) => (
               <Link
                 key={data.id}
@@ -67,10 +88,12 @@ const StudentHomePage = () => {
                 className="block"
               >
                 <div className="w-full ring-2 ring-gray-700 bg-gray-800/85 backdrop-blur-[6px] rounded-xl p-4 font-bangla">
-                  <div className="grid grid-cols-3 justify-between items-center">
+                  <div className="">
                     <p>{data.classLabel} শ্রেণী</p>
-                    <p className="text-center">২৯ / ৩৫</p>
-                    <p className="text-end">৭৮ %</p>
+                    <p className="">
+                      শিক্ষার্থীঃ {enToBnNumber(data.totalStudents)} জন
+                    </p>
+                    {/* <p className="">উপস্থিতিঃ</p> */}
                   </div>
                 </div>
               </Link>

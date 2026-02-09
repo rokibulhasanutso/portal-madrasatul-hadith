@@ -41,7 +41,7 @@ const HomePage = () => {
       </div>
 
       {/* all contents */}
-      <div className="mx-5">
+      {/* <div className="mx-5">
         <h2 className="font-bangla text-xl font-medium my-2.5">
           সকল শ্রেণীর উপস্থিতি
         </h2>
@@ -103,7 +103,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
