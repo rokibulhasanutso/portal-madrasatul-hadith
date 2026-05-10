@@ -38,8 +38,10 @@ import NewAdmissionStudentList from "./pages/students/NewAdmissionStudentList";
 import NewAdmissionStudentEdit from "./pages/students/NewAdmissionStudentEdit";
 import RoutineModelTest from "./pages/test/RoutineModelTest";
 import useResultsData from "./hook/useResultsData";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import supabase from "./supabase/config";
+import StudentSalarySheet from "./pages/StudentSalarySheet";
+import MonthlyExam from "./pages/exam/monthlyExam/MonthlyExam";
 
 const App = () => {
   // const { data: resultData, loading: resultLoading } = useResultsData();
@@ -64,9 +66,75 @@ const App = () => {
   // //   // }
   // // }, [resultLoading]);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const start = performance.now(); // শুরু টাইম
+
+  //     const { data, error } = await supabase.from("annual_exam_result").select("*");
+
+  //     const end = performance.now(); // শেষ টাইম
+
+  //     if (error) {
+  //       console.error("Supabase Error:", error);
+  //       return;
+  //     }
+
+  //     // ডাটার size মাপা
+  //     const jsonString = JSON.stringify(data);
+  //     const sizeInBytes = new TextEncoder().encode(jsonString).length;
+
+  //     // Byte → KB / MB conversion
+  //     const sizeKB = (sizeInBytes / 1024).toFixed(2);
+  //     const sizeMB = (sizeInBytes / (1024 * 1024)).toFixed(2);
+
+  //     // console.log("Fetched data:", data);
+  //     console.log(`Size: ${sizeInBytes} bytes | ${sizeKB} KB | ${sizeMB} MB`);
+  //     console.log(`Request took ${((end - start)/1000).toFixed(2)} s`);
+  //   };
+
+  //   fetchData();
+  // }, []);
+  // const [data, setData] = useState([]);
+
+  // const getStudentsByClass = async () => {
+  //   // setDataLoading(true);
+
+  //   let query = supabase
+  //     .from("students")
+  //     .select(`studentName`)
+  //     .eq("class_code", "2")
+  //     .order("class_code", "desc")
+  //     .order("roll", "desc");
+
+  //   const { data, error } = await query;
+
+  //   if (error) {
+  //     console.log(error);
+  //   } else {
+  //     setData(data.map((d) => d.studentName));
+  //   }
+
+  //   // setDataLoading(false);
+  // };
+
+  // useEffect(() => {
+  //   getStudentsByClass();
+  // }, []);
+
   return (
     <Routes>
       <Route path="/auth" element={<AuthLayout />} />
+
+      {/* <Route
+        index
+        element={
+          <>
+            {data.map((d) => (
+              <p>{d}</p>
+            ))}
+          </>
+        }
+      /> */}
 
       <Route
         path="/"
@@ -159,6 +227,8 @@ const App = () => {
           element={<CenterExaminationStudentListingSheet />}
         />
         <Route path="routine-model" element={<RoutineModelTest />} />
+        <Route path="student-salary-sheet" element={<StudentSalarySheet />} />
+        <Route path="exam-monthly" element={<MonthlyExam />} />
       </Route>
     </Routes>
   );

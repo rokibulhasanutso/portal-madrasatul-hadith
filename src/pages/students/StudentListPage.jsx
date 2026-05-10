@@ -18,7 +18,7 @@ const StudentListPage = () => {
 
     const { data, error } = await supabase
       .from("students")
-      .select("id, studentName, roll, studentImage")
+      .select("id, studentName, roll, studentImage, fatherPhone, motherPhone, otherGuardianPhone")
       .eq("class_code", classcode)
       .order("roll", "desc");
 
@@ -45,11 +45,20 @@ const StudentListPage = () => {
     getStudentsByClass(class_id);
   }, [class_id]);
 
-  const handleCall = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
 
-    console.log("click");
+  console.log(data.students);
+
+  const handleCall = () => {
+    // Your logic to make a call
+    if (data.students.fatherPhone) {
+      window.location.href = `tel:${data.students.fatherPhone}`;
+    } else if (data.students.motherPhone) {
+      window.location.href = `tel:${data.students.motherPhone}`;
+    } else if (data.students.otherGuardianPhone) {
+      window.location.href = `tel:${data.students.otherGuardianPhone}`;
+    } else {
+      alert("No phone number found");
+    }
   };
   return (
     <div className="area-wrapper bg-content-blur font-bangla text-lg">

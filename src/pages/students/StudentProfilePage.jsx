@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import supabase from "../../supabase/config";
-import { Camera, FileEdit, MessageSquare, PhoneCall } from "lucide-react";
+import { Camera, DeleteIcon, FileEdit, MessageSquare, PhoneCall, TrashIcon } from "lucide-react";
 import { enToBnNumber } from "../../utils/functions";
 import NumberSelectModal from "../../components/NumberSelectModal";
 import LoadingComponent from "../../components/LoadingComponent";
@@ -41,16 +41,13 @@ const StudentProfilePage = () => {
     getOneStudent(class_id, student_id);
   }, [class_id, student_id]);
 
-  const handleCall = () => {
-    // Your logic to make a call
-    if (data.fatherPhone) {
-      window.location.href = `tel:${data.fatherPhone}`;
-    } else if (data.motherPhone) {
-      window.location.href = `tel:${data.motherPhone}`;
-    } else if (data.otherGuardianPhone) {
-      window.location.href = `tel:${data.otherGuardianPhone}`;
-    } else {
-      alert("No phone number found");
+  const handleDelete = async () => {
+    // Your logic to delete the student
+    const confirmDelete = window.confirm("আপনি কি এই শিক্ষার্থীকে মুছে ফেলতে নিশ্চিত?");
+    if (confirmDelete) {
+      // Call your delete API or function here
+      await supabase.from("students").delete().eq("id", student_id);
+      navigate("/students/" + class_id);
     }
   };
 
@@ -92,11 +89,17 @@ const StudentProfilePage = () => {
               >
                 <MessageSquare />
               </button>
-              <button
+              {/* <button
                 onClick={handleCall}
                 className="ring-2 ring-gray-700 rounded-xl flex items-center p-2 bg-gray-900 "
               >
                 <PhoneCall />
+              </button> */}
+              <button
+                onClick={handleDelete}
+                className="ring-2 ring-red-700 rounded-xl flex items-center gap-1.5 p-2 bg-red-500/25 hover:bg-red-500 transition-colors"
+              >
+                <TrashIcon /> <span className="">Delete</span>
               </button>
             </div>
           </div>

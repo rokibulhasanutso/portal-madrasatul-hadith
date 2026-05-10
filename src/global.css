@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
 @font-face {
@@ -17,6 +19,8 @@
 @theme {
   --font-bangla: "tiro-bangla", "serif"; 
   --font-galada: "galada", "cursive"; 
+  --font-messiri: "El Messiri", sans-serif; 
+  --font-rajdhani: "Rajdhani", sans-serif; 
   --color-app: #00030c;
 }
 
@@ -45,7 +49,7 @@
     transform: translate(-50%, -50%); 
     /* z-index: -1; */
     /* opacity: 0.1;  */
-    z-index: -1;
+    /* z-index: 1; */
     opacity: 0.225;
   }
 
@@ -90,7 +94,137 @@
     background-size: cover;
     /* z-index: -1;
     opacity: 0.1; */
-    z-index: -1;
+    /* z-index: -1; */
     opacity: 0.225;
+  }
+}
+
+
+
+
+/* ===== Print styles ===== */
+/* @media print {
+  @page {
+    size: legal;
+    margin: 0.5in;
+  }
+
+  body {
+    font-family: "SolaimanLipi", sans-serif;
+    font-size: 11px;
+    color: black;
+  }
+
+  Hide everything except print layout
+  body * {
+    visibility: hidden;
+  }
+
+  .print-layout,
+  .print-layout * {
+    visibility: visible;
+  }
+
+  .print-layout {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 2px 4px;
+    text-align: center;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  Each class on a separate page
+  .salary-page {
+    page-break-after: always;
+  }
+} */
+
+/* @media print {
+  @page {
+    size: A4 landscape;
+    margin: 0.3in;
+  }
+
+  body {
+    font-family: "SolaimanLipi", sans-serif;
+    font-size: 10px;
+    color: black;
+  }
+  
+  body * {
+    visibility: hidden;
+  }
+
+  .print-layout,
+  .print-layout * {
+    visibility: visible;
+  }
+
+  .print-layout {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    page-break-inside: avoid;
+  }
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 1px 2px;
+    font-size: 9.5px;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+
+  .salary-page {
+    page-break-after: always;
+  }
+} */
+
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
   }
 }
