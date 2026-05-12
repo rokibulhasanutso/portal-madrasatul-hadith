@@ -1,11 +1,12 @@
 import { Filter, PhoneCall, Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import supabase from "../../supabase/config";
 import { enToBnNumber } from "../../utils/functions";
 import LoadingComponent from "../../components/LoadingComponent";
 
 const StudentListPage = () => {
+  const navigate = useNavigate();
   const { class_id } = useParams();
   const [data, setData] = useState({
     class: "",
@@ -46,16 +47,25 @@ const StudentListPage = () => {
   }, [class_id]);
 
 
-  console.log(data.students);
+  // console.log(data.students);
 
-  const handleCall = () => {
+  const handleCall = (e, phoneNumber) => {
+    e.stopPropagation();
+
+    console.log("Phone number to call:", phoneNumber);
     // Your logic to make a call
-    if (data.students.fatherPhone) {
-      window.location.href = `tel:${data.students.fatherPhone}`;
-    } else if (data.students.motherPhone) {
-      window.location.href = `tel:${data.students.motherPhone}`;
-    } else if (data.students.otherGuardianPhone) {
-      window.location.href = `tel:${data.students.otherGuardianPhone}`;
+    // if (data.students.fatherPhone) {
+    //   window.location.href = `tel:${data.students.fatherPhone}`;
+    // } else if (data.students.motherPhone) {
+    //   window.location.href = `tel:${data.students.motherPhone}`;
+    // } else if (data.students.otherGuardianPhone) {
+    //   window.location.href = `tel:${data.students.otherGuardianPhone}`;
+    // } else {
+    //   alert("No phone number found");
+    // }
+
+    if (phoneNumber) {
+      window.location.href = `tel:${phoneNumber}`;
     } else {
       alert("No phone number found");
     }
@@ -84,9 +94,9 @@ const StudentListPage = () => {
         <LoadingComponent loadingState={studentsDataLoading}>
           <div className="space-y-5">
             {data.students.map((data) => (
-              <Link
+              <div
                 key={data.id}
-                to={`/students/${class_id}/${data.id}`}
+                onClick={() => (navigate(`/students/${class_id}/${data.id}`))}
                 className="block"
               >
                 <div className="w-full ring-2 ring-gray-700 bg-gray-800/85 backdrop-blur-[6px] rounded-xl p-4 font-bangla">
@@ -109,14 +119,14 @@ const StudentListPage = () => {
                       </p>
                     </div>
                     <button
-                      onClick={handleCall}
+                      onClick={(e) => handleCall(e, data.fatherPhone || data.motherPhone || data.otherGuardianPhone)}
                       className="ring-2 ring-gray-700 p-2 rounded"
                     >
                       <PhoneCall />
                     </button>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </LoadingComponent>

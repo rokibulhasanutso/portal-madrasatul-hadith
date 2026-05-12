@@ -190,7 +190,7 @@ const ColourfulAdmitCard = ({ instituteInfo, student, examRoutine }) => {
             </div>
           </div>
         </div>
-
+        <p className="absolute bottom-0.5 right-10 text-sm font-rajdhani text-gray-700 font-medium">Created by: Rokibul Hasan Utso</p>
       </div>
     </>
   );

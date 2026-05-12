@@ -9,63 +9,80 @@ import { PrintPage } from "@/components/pageComponent/A4page";
 import { LoaderCircleIcon } from "lucide-react";
 import ClassRoomTag from "../classRoomTag/ClassRoomTag";
 import AdmitCardLayout from "../admitCard/AdmitCardLayout";
+import Button from "@/components/Button";
 
 const MonthlyExam = () => {
   const routine = getSecondTermRoutines();
+
   const [dataLoading, setDataLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [classData, setClassData] = useState([]);
+  const [isReadyToPrint, setIsReadyToPrint] = useState(false);
 
   const getStudentsByClass = async () => {
-    setDataLoading(true);
-    const skipIds = [201,150,141, 140, 138, 126, 127, 155, 50];
+    try {
+      setDataLoading(true);
 
-    let query = supabase
-      .from("students")
-      .select(
-        `id, studentName, class_code, roll, studentImage, classes (classLabel)`,
-      )
-      .order("class_code", "desc")
-      .order("roll", "desc")
-      .eq("class_code", 1)
-      .not("id", "in", `(${skipIds.join(",")})`);
+      const { data, error } = await supabase
+        .from("students")
+        .select(
+          `id, studentName, class_code, roll, studentImage, classes (classLabel)`
+        )
+        .order("class_code", "desc")
+        .order("roll", "desc");
 
-
-
-    const { data, error } = await query;
-
-    if (error) {
-      console.log(error);
-    } else {
-      setStudents(data);
+      if (error) {
+        console.log(error);
+      } else {
+        setStudents(data || []);
+      }
+    } catch (error) {
+      alert("An error occurred while fetching students data.");
     }
-
-    setDataLoading(false);
   };
 
   const getClasses = async () => {
-    setDataLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from("classes")
+        .select("*")
+        .order("class_code", "desc");
 
-    let query = supabase
-      .from("classes")
-      .select("*")
-      .order("class_code", "desc");
-
-    const { data, error } = await query;
-
-    if (error) {
+      if (error) {
+        console.log(error);
+      } else {
+        setClassData(data || []);
+      }
+    } catch (error) {
       console.log(error);
-    } else {
-      setClassData(data);
     }
-
-    setDataLoading(false);
   };
 
   useEffect(() => {
-    getStudentsByClass();
-    getClasses();
+    const loadData = async () => {
+      await Promise.all([getStudentsByClass(), getClasses()]);
+      setDataLoading(false);
+      setIsReadyToPrint(true);
+    };
+
+    loadData();
   }, []);
+
+  // সব component render হওয়ার পরে print
+  useEffect(() => {
+    if (
+      isReadyToPrint &&
+      students.length > 0
+    ) {
+      // setTimeout(() => {
+      //   window.print();
+
+      //   window.onafterprint = () => {
+      //     window.close();
+      //   };
+      // }, 500);
+    }
+  }, [isReadyToPrint, students]);
 
   const instituteInfo = {
     name: "মাদ্‌রাসাতুল হাদিস",
@@ -83,32 +100,49 @@ const MonthlyExam = () => {
         </div>
       ) : (
         <>
-          {/* office routine */}
-          {/* <MonthlyExamOfficeRoutine
+          {/* <div className="p-4 text-center">
+            <h1 className="text-3xl font-galada mb-2">{instituteInfo.name}</h1>
+            <p>{instituteInfo.address}</p>
+            <p className="mt-1">{instituteInfo.examTitle}</p>
+
+            {classData.length > 0 && (
+              <p className="mt-1">
+
+
+            )}
+            <Button className={"bg-white"} value={"প্লে শ্রেণী"} />
+          </div> */}
+
+          <div className="">
+
+
+            {/* office routine */}
+            {/* <MonthlyExamOfficeRoutine
             instituteInfo={instituteInfo}
             data={routine}
           /> */}
 
-          {/* classbase routine */}
-          {/* <ClassBaseExamRoutine instituteInfo={instituteInfo} data={routine} /> */}
+            {/* classbase routine */}
+            {/* <ClassBaseExamRoutine instituteInfo={instituteInfo} data={routine} /> */}
 
-          {/* student admit card */}
-          {/* <SimpleAdmitCard
+            {/* student admit card */}
+            {/* <SimpleAdmitCard
             instituteInfo={instituteInfo}
             routine={routine}
             data={students}
           /> */}
-          <AdmitCardLayout
-            instituteInfo={instituteInfo}
-            routine={routine}
-            data={students}
-          />
+            <AdmitCardLayout
+              instituteInfo={instituteInfo}
+              routine={routine}
+              data={students}
+            />
 
-          {/* roll number slip */}
-          {/* <RollNumberSlip instituteInfo={instituteInfo} data={students} /> */}
+            {/* roll number slip */}
+            {/* <RollNumberSlip instituteInfo={instituteInfo} data={students} /> */}
 
-          {/* Class Room Tag */}
-          {/* <ClassRoomTag instituteInfo={instituteInfo} data={classData} /> */}
+            {/* Class Room Tag */}
+            {/* <ClassRoomTag instituteInfo={instituteInfo} data={classData} /> */}
+          </div>
         </>
       )}
     </div>
