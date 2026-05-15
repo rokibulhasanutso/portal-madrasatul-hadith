@@ -52,7 +52,7 @@ const AuthLayout = () => {
   };
 
   return (
-    <div className="max-w-[512px] min-h-svh mx-auto flex flex-col justify-center items-center">
+    <div className="max-w-[512px] min-h-svh mx-auto flex flex-col justify-center items-center bg-white">
       <div className="flex-1 w-full flex flex-col justify-center items-center">
         <div className="py-10 space-y-3.5">
           <Logo className={"size-36 mx-auto"} />

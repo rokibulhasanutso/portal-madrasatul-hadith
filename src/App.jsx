@@ -42,6 +42,7 @@ import { useEffect, useState } from "react";
 import supabase from "./supabase/config";
 import StudentSalarySheet from "./pages/StudentSalarySheet";
 import MonthlyExam from "./pages/exam/monthlyExam/MonthlyExam";
+import ClassRoutine from "./pages/routine/ClassRoutine";
 
 const App = () => {
   // const { data: resultData, loading: resultLoading } = useResultsData();
@@ -229,6 +230,7 @@ const App = () => {
         <Route path="routine-model" element={<RoutineModelTest />} />
         <Route path="student-salary-sheet" element={<StudentSalarySheet />} />
         <Route path="exam-monthly" element={<MonthlyExam />} />
+        <Route path="class-routine" element={<ClassRoutine />} />
       </Route>
     </Routes>
   );
