@@ -4,7 +4,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { enToBnNumber } from "../../utils/functions";
 import BackgroundBlurWrapper from "../../components/BackgroundBlurWrapper";
 import TextInput from "../../components/TextInput";
-import { secondTermExamSubjects } from "../../static/SecondTermExamRoutine";
 import LoadingComponent from "../../components/LoadingComponent";
 import Button from "../../components/Button";
 import {
@@ -16,6 +15,7 @@ import {
   Loader,
   Newspaper,
 } from "lucide-react";
+import { subjectsCodeWithLabels } from "@/static/subjects";
 
 const ResultUpdatePage = () => {
   const [searchParams] = useSearchParams();
@@ -62,7 +62,7 @@ const ResultUpdatePage = () => {
       .from("students")
       .select("id, studentName, roll, studentImage")
       .eq("class_code", classCode)
-      .order("id", { ascending: true });
+      .order("roll", { ascending: true });
 
     if (error) {
       console.log(error);
@@ -236,7 +236,7 @@ const ResultUpdatePage = () => {
           <p className="text-2xl">{classLabel}</p>
         </div>
         <p className="px-4 py-2.5 bg-gray-900 text-center">
-          {secondTermExamSubjects[subjectCode]}
+          {subjectsCodeWithLabels[subjectCode]}
         </p>
         <div className="flex justify-between p-2.5">
           <div className="flex gap-4 items-center">

@@ -126,7 +126,7 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
                       </tr>
                     ))}
 
-                  <tr>
+                  {/* <tr>
                     <td colSpan={5} className="px-3 leading-none">
                       অতিরিক্ত নাম্বার
                     </td>
@@ -140,12 +140,12 @@ const ResultMarkSheetTemplate = ({ sheetName, data, examName }) => {
                         <span className="p-0 leading-none">অনুপস্থিতিঃ {enToBnNumber(data?.absent)} দিন</span>
                       </span>
                     </td>
-                    <td>{enToBnNumber(data?.results[0].full_marks)}</td>
+                    <td>{enToBnNumber(data?.results[0]?.full_marks)}</td>
                     <td>
-                      {enToBnNumber(data?.results[0].obtained_marks.toFixed(2))}
+                      {enToBnNumber(data?.results[0]?.obtained_marks.toFixed(2))}
                     </td>
-                    <td>{data?.results[0].grade}</td>
-                  </tr>
+                    <td>{data?.results[0]?.grade}</td>
+                  </tr> */}
 
                   {/* total result table */}
                   <tr className="*:border text-center ">

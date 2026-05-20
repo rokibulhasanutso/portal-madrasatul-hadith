@@ -5,10 +5,6 @@ import BackgroundBlurWrapper from "../../components/BackgroundBlurWrapper";
 import { BookOpenCheck, Download, Loader2, NotebookPen } from "lucide-react";
 import Button from "../../components/Button";
 import SelectInput from "../../components/SelectInput";
-import {
-  secondTermExamClassBySubjectCodes,
-  secondTermExamSubjects,
-} from "../../static/SecondTermExamRoutine";
 // import AdjustSheetMobileScreen from "../../components/AdjustSheetMobileScreen";
 const AdjustSheetMobileScreen = React.lazy(() =>
   import("../../components/AdjustSheetMobileScreen")
@@ -19,6 +15,7 @@ const ResultMarkSheetTemplate = React.lazy(() =>
 import useResultsData from "../../hook/useResultsData";
 import { enToBnNumber } from "../../utils/functions";
 import { usePdfDownloader } from "../../hook/usePdfDownloader";
+import { classBaseSubjectCode, subjectsCodeWithLabels } from "@/static/subjects";
 
 const ResultPage = () => {
   const navigate = useNavigate();
@@ -53,7 +50,7 @@ const ResultPage = () => {
   const getExamResultList = async () => {
     try {
       const subjectCodes =
-        secondTermExamClassBySubjectCodes[selectedData.class_code];
+        classBaseSubjectCode[selectedData.class_code];
 
       if (!subjectCodes || subjectCodes.length === 0) {
         console.warn("No subject codes found for the selected class.");
@@ -101,9 +98,8 @@ const ResultPage = () => {
   const handleSubmit = () => {
     // handle form submission
     navigate(
-      `update?c_c=${selectedData.class_code}&ccl=${
-        classData.find((data) => data.class_code === selectedData.class_code)
-          .classLabel
+      `update?c_c=${selectedData.class_code}&ccl=${classData.find((data) => data.class_code === selectedData.class_code)
+        .classLabel
       }&s_c=${selectedData.subject_code}`
     );
   };
@@ -111,13 +107,11 @@ const ResultPage = () => {
   const { data: resultData, loading: resultLoading } = useResultsData();
   const { downloadPdf, loading: sheetDownloadLoading } = usePdfDownloader({
     sheetData: {
-      sheetName: `বার্ষিক পরীক্ষা ২০২৫ইং - ${
-        classData?.[selectedForResult.class - 1]?.classLabel || "সকল"
-      } শ্রেণী${
-        selectedForResult.roll
+      sheetName: `প্রথম সাময়িক পরীক্ষা ২০২৬ইং - ${classData?.[selectedForResult.class - 1]?.classLabel || "সকল"
+        } শ্রেণী${selectedForResult.roll
           ? ` - রোল ${enToBnNumber(selectedForResult.roll).padStart(2, "০")}`
           : ""
-      }`,
+        }`,
     },
     elementName: ".sheet",
   });
@@ -126,14 +120,15 @@ const ResultPage = () => {
     const getattendence = async () => {
       const { data } = await supabase.from("attendence").select("*");
 
-      const mainData = resultData
-        .map((a1) => {
-          const match = data.find((a2) => a2.id === a1.id);
-          return match ? { ...a1, ...match } : null;
-        })
-        .filter(Boolean);
+      // const mainData = resultData
+      //   .map((a1) => {
+      //     const match = data.find((a2) => a2.id === a1.id);
+      //     return match ? { ...a1, ...match } : null;
+      //   })
+      //   .filter(Boolean);
 
-      setMainResultData(mainData);
+      // setMainResultData(mainData);
+      setMainResultData(resultData);
     };
     getattendence();
   }, [resultData]);
@@ -172,9 +167,8 @@ const ResultPage = () => {
               <h4 className="text-center">শ্রেণী ও বিষয় নির্বাচন করুন</h4>
 
               <SelectInput
-                className={`*:odd:bg-gray-800 *:my-1.5 ${
-                  selectedData.class_code ? "" : "text-gray-500 *:text-white"
-                }`}
+                className={`*:odd:bg-gray-800 *:my-1.5 ${selectedData.class_code ? "" : "text-gray-500 *:text-white"
+                  }`}
                 firstOption={{
                   value: null,
                   label: "শ্রেণী নির্বাচন করুন",
@@ -194,9 +188,8 @@ const ResultPage = () => {
               </SelectInput>
 
               <SelectInput
-                className={`*:odd:bg-gray-800 *:my-1.5 ${
-                  selectedData.subject_code ? "" : "text-gray-500 *:text-white"
-                }`}
+                className={`*:odd:bg-gray-800 *:my-1.5 ${selectedData.subject_code ? "" : "text-gray-500 *:text-white"
+                  }`}
                 firstOption={{
                   value: null,
                   label: "বিষয় নির্বাচন করুন",
@@ -208,23 +201,22 @@ const ResultPage = () => {
                   }))
                 }
               >
-                {secondTermExamClassBySubjectCodes[
+                {classBaseSubjectCode[
                   selectedData.class_code
                 ]?.map((data, index) => (
                   <option key={index} value={data}>
                     {subjectWaysUpdateResult[data] && "✔"}{" "}
-                    {secondTermExamSubjects[data]}
+                    {subjectsCodeWithLabels[data]}
                   </option>
                 ))}
               </SelectInput>
 
               <Button
                 value={"তৈরি করুন"}
-                className={`w-full text-center my-3.5 ${
-                  selectedData.class_code && selectedData.subject_code
-                    ? ""
-                    : "text-gray-500 select-none pointer-events-none"
-                }`}
+                className={`w-full text-center my-3.5 ${selectedData.class_code && selectedData.subject_code
+                  ? ""
+                  : "text-gray-500 select-none pointer-events-none"
+                  }`}
                 onClick={handleSubmit}
               />
             </div>
@@ -235,9 +227,8 @@ const ResultPage = () => {
           <>
             <div className="flex gap-3.5">
               <SelectInput
-                className={`*:odd:bg-gray-800 *:my-1.5 ${
-                  selectedData.class_code ? "" : "text-gray-500 *:text-white"
-                }`}
+                className={`*:odd:bg-gray-800 *:my-1.5 ${selectedData.class_code ? "" : "text-gray-500 *:text-white"
+                  }`}
                 firstOption={{
                   value: null,
                   label: "সকল শ্রেণী",
@@ -257,9 +248,8 @@ const ResultPage = () => {
               </SelectInput>
 
               <SelectInput
-                className={`*:odd:bg-gray-800 text-left *:my-1.5 ${
-                  selectedData.class_code ? "" : "text-gray-500 *:text-white"
-                }`}
+                className={`*:odd:bg-gray-800 text-left *:my-1.5 ${selectedData.class_code ? "" : "text-gray-500 *:text-white"
+                  }`}
                 firstOption={{
                   value: null,
                   label: "সকল শিক্ষার্থী",
@@ -322,7 +312,7 @@ const ResultPage = () => {
                         >
                           <ResultMarkSheetTemplate
                             sheetName={"sheet"}
-                            examName="বার্ষিক পরীক্ষা - ২০২৫ইং"
+                            examName="প্রথম সাময়িক পরীক্ষা ২০২৬ইং"
                             data={item}
                           />
                         </div>

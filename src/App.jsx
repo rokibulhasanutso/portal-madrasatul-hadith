@@ -37,9 +37,6 @@ import NewAdmissionStudentProfile from "./pages/students/NewAdmissionStudentProf
 import NewAdmissionStudentList from "./pages/students/NewAdmissionStudentList";
 import NewAdmissionStudentEdit from "./pages/students/NewAdmissionStudentEdit";
 import RoutineModelTest from "./pages/test/RoutineModelTest";
-import useResultsData from "./hook/useResultsData";
-import { useEffect, useState } from "react";
-import supabase from "./supabase/config";
 import StudentSalarySheet from "./pages/StudentSalarySheet";
 import MonthlyExam from "./pages/exam/monthlyExam/MonthlyExam";
 import ClassRoutine from "./pages/routine/ClassRoutine";

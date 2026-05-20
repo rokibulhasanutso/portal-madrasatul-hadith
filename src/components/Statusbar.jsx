@@ -73,7 +73,7 @@ const Statusbar = () => {
       </Link> */}
 
       {/* cate 5 */}
-      {/* <Link to={"/results"}>
+      <Link to={"/results"}>
         <div className="space-y-2">
           <div className="size-14 flex justify-center items-center rounded-full overflow-hidden mx-auto bg-white">
             <img
@@ -87,7 +87,7 @@ const Statusbar = () => {
             
           </div>
         </div>
-      </Link> */}
+      </Link>
 
       {/* cate 6 */}
       {/* <Link to={"/admission/new"}>

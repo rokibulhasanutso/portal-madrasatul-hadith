@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import {
-  secondTermExamClassBySubjectCodes as SUBJECTS_BY_CLASS,
+  classBaseSubjectCode as SUBJECTS_BY_CLASS,
   subjectInfo as SUBJECTS_INFO,
-} from "../static/SecondTermExamRoutine.js";
+} from "../static/subjects.js";
 import supabase from "../supabase/config.js";
 import { getGrade } from "../utils/examFunctions.js";
 

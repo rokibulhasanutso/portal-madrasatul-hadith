@@ -4,7 +4,7 @@ import LoginForm from "../components/LoginForm";
 import supabase from "../supabase/config";
 import { Loader } from "lucide-react";
 import { useAuth } from "../providers/AuthProvider";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AuthLayout = () => {
   const { saveAuth } = useAuth();
