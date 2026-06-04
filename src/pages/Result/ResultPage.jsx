@@ -32,7 +32,7 @@ const ResultPage = () => {
   });
 
   const [subjectWaysUpdateResult, setSubjectWaysUpdateResult] = useState({});
-  const [mainResultData, setMainResultData] = useState({});
+  const [mainResultData, setMainResultData] = useState([]);
 
   const getClassList = async () => {
     const { data, error } = await supabase.from("classes").select("*");

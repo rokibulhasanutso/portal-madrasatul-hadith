@@ -31,7 +31,7 @@ export const subjectsCodeWithLabels = {
 export const classBaseSubjectCode = {
   1: [104, 105, 109, 101, 102, 103, 118], // play
   2: [104, 105, 109, 101, 102, 103, 118], // nursery
-  3: [104, 105, 107, 119, 101, 102, 103, 118, 110], // class 1
+  3: [104, 105, 107, 119, 101, 102, 103, 118], // class 1
   4: [104, 107, 108, 109, 110, 101, 102, 103, 113, 118], // class 2
   5: [104, 107, 108, 109, 110, 101, 102, 103, 114, 118], // class 3
   6: [115, 116, 117, 101, 102, 103, 111, 112], // class 4
@@ -46,7 +46,7 @@ export const subjectInfo = {
   103: {name: "গণিত", fullMarks: 100},
   104: {name: "আরবি লিখা", fullMarks: 100},
   105: {name: "হাদিস শরীফ", fullMarks: 100},
-  106: {name: "ইংলিশ গ্রামার", fullMarks: 100},
+  106: {name: "ইংলিশ গ্রামার", fullMarks: 50},
   107: {name: "হিফজুল কুরআন ও তাজবীদ", fullMarks: 100},
   108: {name: "হাদিস শরীফ ও আসমাউল হুসনা", fullMarks: 100},
   109: {name: "কালিমা ও মাসায়িল", fullMarks: 100},
@@ -58,11 +58,11 @@ export const subjectInfo = {
   115: {name: "কুরআন মাজিদ", fullMarks: 100},
   116: {name: "আদ্ দুরূসুল আরাবিয়্যাহ্", fullMarks: 100},
   117: {name: "আকইদ ও ফিকাহ", fullMarks: 100},
-  118: {name: "বাংলা দিয়ে ইংরেজি শিখি", fullMarks: 100},
+  118: {name: "বাংলা দিয়ে ইংরেজি শিখি", fullMarks: 50},
   119: {name: "কালিমা ও মাসায়িল ও সাধারণ জ্ঞান", fullMarks: 100},
   120: {name: "তথ্য ও যোগাযোগ প্রযুক্তি", fullMarks: 50},
   121: {name: "ইসলাম ও নৈতিক শিক্ষা", fullMarks: 100},
-  122: {name: "কৃষি শিক্ষা", fullMarks: 100},
+  122: {name: "কৃষি শিক্ষা", fullMarks: 50},
   123: {name: "বাংলা ১ম পত্র", fullMarks: 100},
   124: {name: "ইংরেজি ১ম পত্র", fullMarks: 100},
   125: {name: "বাংলা ২য় পত্র", fullMarks: 50},

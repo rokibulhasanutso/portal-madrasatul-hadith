@@ -225,7 +225,7 @@ const App = () => {
           element={<CenterExaminationStudentListingSheet />}
         />
         <Route path="routine-model" element={<RoutineModelTest />} />
-        <Route path="student-salary-sheet" element={<StudentSalarySheet />} />
+        <Route path="student-fee-sheet" element={<StudentSalarySheet />} />
         <Route path="exam-monthly" element={<MonthlyExam />} />
         <Route path="class-routine" element={<ClassRoutine />} />
       </Route>
