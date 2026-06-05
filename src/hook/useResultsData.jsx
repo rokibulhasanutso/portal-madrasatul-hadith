@@ -63,8 +63,8 @@ const useResultsData = ({ idParam, classCodeParam, rollParams } = {}) => {
       let allOverGrade = hasFail
         ? "F"
         : totalGrade === "A+" && !allAPlus
-        ? "A"
-        : totalGrade;
+          ? "A"
+          : totalGrade;
 
       return {
         id: item.id,
@@ -90,12 +90,20 @@ const useResultsData = ({ idParam, classCodeParam, rollParams } = {}) => {
 
     const studentsWithPlacement = Object.values(groupedByClass).flatMap(
       (classGroup) => {
-        return [...classGroup]
-          .sort((a, b) => b.total_obtained_marks - a.total_obtained_marks)
-          .map((student, index) => ({
-            ...student,
-            placement: index + 1,
-          }));
+        const passed = classGroup.filter((s) => s.grade !== "F");
+        const failed = classGroup.filter((s) => s.grade === "F");
+
+        const sortedPassed = [...passed].sort(
+          (a, b) => b.total_obtained_marks - a.total_obtained_marks
+        );
+        const sortedFailed = [...failed].sort(
+          (a, b) => b.total_obtained_marks - a.total_obtained_marks
+        );
+
+        return [...sortedPassed, ...sortedFailed].map((student, index) => ({
+          ...student,
+          placement: index + 1,
+        }));
       }
     );
 
