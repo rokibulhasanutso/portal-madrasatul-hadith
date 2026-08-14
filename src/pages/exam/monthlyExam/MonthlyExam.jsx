@@ -87,8 +87,8 @@ const MonthlyExam = () => {
   const instituteInfo = {
     name: "মাদ্‌রাসাতুল হাদিস",
     address: "পুঠিয়ারপাড়, সরিষাবাড়ী, জামালপুর।",
-    examTitle: "প্রথম সাময়িক পরীক্ষা - ২০২৬ইং",
-    examStartTime: "সকাল ৯টা ও বিকাল ২টা",
+    examTitle: "দ্বিতীয় সাময়িক পরীক্ষা - ২০২৬ইং",
+    examStartTime: "সকাল ৯টা",
   };
 
   return (
@@ -118,27 +118,25 @@ const MonthlyExam = () => {
 
             {/* office routine */}
             {/* <MonthlyExamOfficeRoutine
-            instituteInfo={instituteInfo}
-            data={routine}
-          /> */}
+              instituteInfo={instituteInfo}
+              data={routine}
+            /> */}
 
             {/* classbase routine */}
             {/* <ClassBaseExamRoutine instituteInfo={instituteInfo} data={routine} /> */}
 
             {/* student admit card */}
-            {/* <SimpleAdmitCard
-            instituteInfo={instituteInfo}
-            routine={routine}
-            data={students}
-          /> */}
             <AdmitCardLayout
               instituteInfo={instituteInfo}
               routine={routine}
-              data={students}
+              data={students.filter(student =>
+                [215, 216].includes(student.id))}
             />
 
             {/* roll number slip */}
-            {/* <RollNumberSlip instituteInfo={instituteInfo} data={students} /> */}
+            {/* <RollNumberSlip instituteInfo={instituteInfo} data={students.filter(student =>
+              [1, 2, 3, 4, 5].includes(student.class_code)
+            )} /> */}
 
             {/* Class Room Tag */}
             {/* <ClassRoomTag instituteInfo={instituteInfo} data={classData} /> */}

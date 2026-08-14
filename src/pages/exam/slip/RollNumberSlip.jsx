@@ -15,7 +15,7 @@ const RollNumberSlip = ({ data = [], instituteInfo }) => {
           padding={{ x: 0, y: 0, unit: "cm" }}
           className="grid grid-cols-3 grid-rows-5 size-full text-[14pt]"
         >
-          {pair?.map((student) => (
+          {pair?.filter((student) => !!student.class_code).map((student) => (
             <div
               key={student.id}
               className="p-6 border-[0.1px] border-dashed border-gray-300"
@@ -26,6 +26,7 @@ const RollNumberSlip = ({ data = [], instituteInfo }) => {
                   <p className="text-center text-2xl">{instituteInfo.name}</p>
                   <p className="text-center text-sm font-bangla">
                     {instituteInfo.examTitle}
+                    {/* {[8, 7, 6].includes(student.class_code) ? instituteInfo.examTitle : "মাসিক মূল্যায়ন পরীক্ষা - জুন/২০২৬ইং"} */}
                   </p>
                 </div>
 
@@ -55,7 +56,7 @@ const RollNumberSlip = ({ data = [], instituteInfo }) => {
                 আর কোনো শিক্ষার্থীর রোল নাম্বার স্লিপ নেই।
               </p>
 
-              {/* just for test */}
+              
               <p className="font-rajdhani font-semibold mt-10 text-gray-300">
                 This software develop by{" "}
                 <span className="text-gray-500">

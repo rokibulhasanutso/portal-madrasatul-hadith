@@ -1,13 +1,12 @@
 import React from "react";
-// import { secondTermExamRoutine } from "../static/SecondTermExamRoutine";
-import { QRCodeCanvas, QRCodeSVG } from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 import { enToBnNumber } from "@/utils/functions";
-import { groupArray } from "@/utils/array";
-// import { Star, StarOff } from "lucide-react";
+import { nanoid } from "nanoid";
 
 const ColourfulAdmitCard = ({ instituteInfo, student, examRoutine }) => {
 
-  // console.log(instituteInfo, student, examRoutine)
+  const uniqueId = nanoid(6);
+
   return (
     <>
       <div
@@ -190,7 +189,7 @@ const ColourfulAdmitCard = ({ instituteInfo, student, examRoutine }) => {
             </div>
           </div>
         </div>
-        <p className="absolute bottom-0.5 right-10 text-sm font-rajdhani text-gray-700 font-medium">Created by: Rokibul Hasan Utso</p>
+        <p className="absolute bottom-32 -right-23 text-sm font-rajdhani text-gray-700 font-medium -rotate-90">Created by: Rokibul Hasan Utso {"#" + uniqueId}</p>
       </div>
     </>
   );

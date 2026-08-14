@@ -9,12 +9,12 @@ const MonthlyExamOfficeRoutine = ({ data = [], instituteInfo }) => {
     <>
       <PrintPage
         size="A4"
-        orientation="landscape"
+        // orientation=""
         padding={{ x: 2, y: 0, unit: "cm" }}
-        className="flex flex-col justify-start text-[15.5pt]"
+        className="flex flex-col justify-center text-[12.5pt]"
       >
         {/* Header */}
-        <div className="text-center mb-6 mt-10">
+        <div className="text-center mb-6 mt-6">
           <h1 className="text-[32pt] font-galada">{instituteInfo?.name}</h1>
           <p>{instituteInfo?.address}</p>
           <p className="mt-1">{instituteInfo?.examTitle}</p>
@@ -23,39 +23,41 @@ const MonthlyExamOfficeRoutine = ({ data = [], instituteInfo }) => {
         {/* Title */}
         <div className="text-center">
           <h2 className=" text-white bg-gray-500 inline-block pb-1 pt-2.5 px-14 rounded-t-4xl text-[18pt]">
-            প্রথম সাময়িক পরীক্ষার অফিস রুটিন
+            দ্বিতীয় সাময়িক পরীক্ষার অফিস রুটিন
           </h2>
         </div>
 
         {/* ===================== ROUTINE TABLE ===================== */}
-        <table className="table-fixed w-full border-3 border-gray-500 border-collapse mb-8">
+        <table className="table-fixed w-full border-3 border-gray-500 border-collapse mb-4 text-[13pt]">
           <thead>
             <tr>
-              <th className="border-2 border-gray-300 py-2 w-20">শ্রেণী</th>
+              <th className="border-2 border-gray-300 py-2">
+                শ্রেণী
+              </th>
 
-              {examDates.map((exam, i) => (
+              {data.map((cls, i) => (
                 <th key={i} className="border-2 border-gray-300 py-2">
-                  {exam.date} <br />
-                  {"(" + exam.week + ")"}
+                  {cls.class}
                 </th>
               ))}
             </tr>
           </thead>
 
           <tbody>
-            {data.map((cls, index) => (
-              <tr key={index} className="text-center">
+            {examDates.map((exam, rowIndex) => (
+              <tr key={rowIndex} className="text-center">
                 <td className="border-2 border-gray-300 py-2 font-semibold">
-                  {cls.class}
+                  {exam.date}
+                  <br />
+                  ({exam.week})
                 </td>
 
-                {/* Subjects (Safe Version Here) */}
-                {examDates.map((_, i) => (
+                {data.map((cls, colIndex) => (
                   <td
-                    key={i}
+                    key={colIndex}
                     className="border-2 border-gray-300 py-2 px-1 even:bg-gray-100"
                   >
-                    {cls.routine[i]?.subject || "-"}
+                    {cls.routine[rowIndex]?.subject || "-"}
                   </td>
                 ))}
               </tr>
@@ -64,9 +66,9 @@ const MonthlyExamOfficeRoutine = ({ data = [], instituteInfo }) => {
         </table>
 
         {/* ===================== FEE TABLE ===================== */}
-        <div className="mt-6">
+        <div className="mt-2">
           <h1 className="text-center">
-            <span className="px-10 pb-2 pt-3 rounded-t-4xl text-center bg-gray-500 text-white text-[16pt]">
+            <span className="px-10 pb-2 pt-3 rounded-t-4xl text-center bg-gray-500 text-white text-[14pt]">
               ক্লাস ভিত্তিক পরীক্ষার ফি সমূহ
             </span>
           </h1>

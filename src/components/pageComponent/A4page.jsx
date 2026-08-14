@@ -40,6 +40,7 @@ export const PrintPage = ({
   autoPrint = false,
   className = "",
   style = {},
+  holograph = false,
 }) => {
   // resolve page size
   const resolvedSize =
@@ -69,7 +70,7 @@ export const PrintPage = ({
 
   return (
     <>
-      <div className="print:bg-white py-10 print:p-0 print:break-after-page last:print:break-after-auto">
+      <div className="print:bg-white py-10 print:p-0 print:break-after-page last:print:break-after-auto overflow-hidden">
         <div
           className={cn(
             `
@@ -98,6 +99,17 @@ export const PrintPage = ({
           }}
         >
           {children}
+          {
+            holograph ?
+              <div style={{ width: (pageHeight + 10), height: 0 }} className="absolute top-0 left-full -translate-x-1/6 opacity-10">
+                <div className="relative rotate-90 origin-left -mt-3 ml-3 text-nowrap overflow-hidden bg-black h-6">
+                  {Array.from({ length: 10 }).map(() => (
+                    <span className="leading-0 text-white font-medium text-[12pt]">মাদ্‌রাসাতুল হাদিস </span>
+                  ))}
+                </div>
+              </div>
+              : null
+          }
         </div>
       </div>
 

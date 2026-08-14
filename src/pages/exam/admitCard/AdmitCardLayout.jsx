@@ -2,6 +2,7 @@ import { PrintPage } from "@/components/pageComponent/A4page";
 import PageDeviderScissorCutLine from "@/components/pageComponent/PageDeviderScissorCutLine";
 import { pairOjectArray } from "@/utils/pairOjectArray";
 import ColourfulAdmitCard from "./ColourfulAdmitCard";
+import SimpleAdmitCard from "./SimpleAdmitCard";
 
 // const AdmitCardLayout = ({ children }) => {
 //   return (
@@ -30,7 +31,7 @@ const AdmitCardLayout = ({
 }) => {
   const pairData = pairOjectArray(data) || [];
 
-  // console.log(pairData)
+  // console.log(routine)
 
   return (
     <>
@@ -41,6 +42,7 @@ const AdmitCardLayout = ({
           orientation="portrait"
           padding={{ x: 0, y: 0, unit: "cm" }}
           className="flex flex-col justify-center text-[14pt]"
+          holograph={true}
         >
           {/* ✂ CUT LINE WITH SCISSOR */}
           <PageDeviderScissorCutLine />
@@ -49,7 +51,7 @@ const AdmitCardLayout = ({
             {pair?.map((student) => (
               <div
                 key={student?.id}
-                className="flex-1 flex items-center justify-center"
+                className="flex-1 flex items-center justify-center" //px-6
               >
 
                 <ColourfulAdmitCard
@@ -57,6 +59,14 @@ const AdmitCardLayout = ({
                   examRoutine={routine[student?.class_code - 1]}
                   student={student}
                 />
+
+                {/* <SimpleAdmitCard
+                  instituteInfo={instituteInfo}
+                  examRoutine={routine[student?.class_code - 1]}
+                  student={student}
+                /> */}
+
+
 
               </div>
             ))}

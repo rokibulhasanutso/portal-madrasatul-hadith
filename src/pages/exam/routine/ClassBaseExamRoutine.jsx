@@ -28,8 +28,8 @@ const ClassBaseExamRoutine = ({ data: routine = {}, instituteInfo = {} }) => {
 
         {/* Title */}
         <div className="text-center mb-6">
-          <h2 className="font-semibold text-white bg-black inline-block py-2 px-8 rounded-full text-[18pt]">
-            {data?.class} শ্রেণীর ১ম সাময়িক পরীক্ষার রুটিন
+          <h2 className="font-semibold text-white bg-black inline-block py-2 px-8 rounded-full text-[16pt]">
+            {data?.class} শ্রেণীর দ্বিতীয় সাময়িক পরীক্ষার রুটিন
           </h2>
         </div>
 
@@ -44,7 +44,7 @@ const ClassBaseExamRoutine = ({ data: routine = {}, instituteInfo = {} }) => {
           </thead>
 
           <tbody>
-            {data?.routine?.map((row, index) => (
+            {data?.routine?.filter((row) => row.subject !== "").map((row, index) => (
               <tr key={index} className="text-center odd:bg-gray-100">
                 <td className="border border-black py-2">{row.date}</td>
                 <td className="border border-black py-2">{row.week}</td>
@@ -56,20 +56,20 @@ const ClassBaseExamRoutine = ({ data: routine = {}, instituteInfo = {} }) => {
 
         {/* Fee */}
         <div className="text-center mt-6">
-          <p className="font-semibold text-[24pt]">
+          <p className="font-semibold text-[22pt]">
             পরীক্ষার ফি {enToBnNumber(data?.fee || 0)} টাকা
           </p>
         </div>
 
         {/* Instruction */}
-        <div className="border-2 border-black rounded-2xl mt-6">
+        <div className="border-2 border-black rounded-2xl mt-6 text-[14pt]">
           {/* Instructions Header */}
-          <div className="bg-black/10 text-black text-center pb-2 pt-4 font-medium rounded-t-2xl text-[16pt] font-galada">
+          <div className="bg-black/10 text-black text-center pb-2 pt-4 font-medium rounded-t-2xl font-galada">
             শিক্ষার্থীদের জন্য বিশেষ নির্দেশনা
           </div>
 
           {/* Instructions List */}
-          <ul className="my-4 space-y-2 leading-relaxed px-6 text-justify">
+          <ul className="my-4 leading-snug px-6 text-justify">
             {examInstructions.map((item, index) => (
               <li
                 key={index}
