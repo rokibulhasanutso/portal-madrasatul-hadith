@@ -312,7 +312,7 @@ const ResultPage = () => {
                         >
                           <ResultMarkSheetTemplate
                             sheetName={"sheet"}
-                            examName="প্রথম সাময়িক পরীক্ষা ২০২৬ইং"
+                            examName="দ্বিতীয় সাময়িক পরীক্ষা ২০২৬ইং"
                             data={item}
                           />
                         </div>
