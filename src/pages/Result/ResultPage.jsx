@@ -107,7 +107,7 @@ const ResultPage = () => {
   const { data: resultData, loading: resultLoading } = useResultsData();
   const { downloadPdf, loading: sheetDownloadLoading } = usePdfDownloader({
     sheetData: {
-      sheetName: `প্রথম সাময়িক পরীক্ষা ২০২৬ইং - ${classData?.[selectedForResult.class - 1]?.classLabel || "সকল"
+      sheetName: `দ্বিতীয় সাময়িক পরীক্ষা ২০২৬ইং - ${classData?.[selectedForResult.class - 1]?.classLabel || "সকল"
         } শ্রেণী${selectedForResult.roll
           ? ` - রোল ${enToBnNumber(selectedForResult.roll).padStart(2, "০")}`
           : ""
@@ -129,6 +129,8 @@ const ResultPage = () => {
 
       // setMainResultData(mainData);
       setMainResultData(resultData);
+
+      console.log(resultData);
     };
     getattendence();
   }, [resultData]);
