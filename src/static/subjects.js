@@ -68,5 +68,5 @@ export const subjectInfo = {
   124: { name: "ইংরেজি ১ম পত্র", fullMarks: 100 },
   125: { name: "বাংলা ২য় পত্র", fullMarks: 50 },
   126: { name: "ইংরেজি ২য় পত্র", fullMarks: 50 },
-  127: { name: "তাজবীদ ও মাখরাজ", fullMarks: 50 },
+  127: { name: "তাজবীদ ও মাখরাজ", fullMarks: 100 },
 }
