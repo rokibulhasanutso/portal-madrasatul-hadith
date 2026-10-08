@@ -3,6 +3,7 @@ import PageDeviderScissorCutLine from "@/components/pageComponent/PageDeviderSci
 import { pairOjectArray } from "@/utils/pairOjectArray";
 import ColourfulAdmitCard from "./ColourfulAdmitCard";
 import SimpleAdmitCard from "./SimpleAdmitCard";
+import GreenGoldenAdmitCard from "./GreenGoldenAdmitCard";
 
 // const AdmitCardLayout = ({ children }) => {
 //   return (
@@ -54,7 +55,13 @@ const AdmitCardLayout = ({
                 className="flex-1 flex items-center justify-center" //px-6
               >
 
-                <ColourfulAdmitCard
+                {/* <ColourfulAdmitCard
+                  instituteInfo={instituteInfo}
+                  examRoutine={routine[student?.class_code - 1]}
+                  student={student}
+                /> */}
+
+                <GreenGoldenAdmitCard
                   instituteInfo={instituteInfo}
                   examRoutine={routine[student?.class_code - 1]}
                   student={student}

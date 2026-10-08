@@ -23,13 +23,13 @@ const ClassBaseExamRoutine = ({ data: routine = {}, instituteInfo = {} }) => {
         <div className="text-center mb-6">
           <h1 className="text-[32pt] font-galada">{instituteInfo?.name}</h1>
           <p>{instituteInfo?.address}</p>
-          <p className="mt-1">{instituteInfo?.examTitle}</p>
+          <p className="mt-1">{instituteInfo?.examTitle} পরীক্ষা - {instituteInfo?.examYear}</p>
         </div>
 
         {/* Title */}
         <div className="text-center mb-6">
           <h2 className="font-semibold text-white bg-black inline-block py-2 px-8 rounded-full text-[16pt]">
-            {data?.class} শ্রেণীর দ্বিতীয় সাময়িক পরীক্ষার রুটিন
+            {data?.class} শ্রেণীর {instituteInfo?.examTitle} পরীক্ষার রুটিন
           </h2>
         </div>
 

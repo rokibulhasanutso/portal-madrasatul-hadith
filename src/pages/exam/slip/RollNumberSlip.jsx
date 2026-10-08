@@ -20,12 +20,12 @@ const RollNumberSlip = ({ data = [], instituteInfo }) => {
               key={student.id}
               className="p-6 border-[0.1px] border-dashed border-gray-300"
             >
-              <div className="ring-6 ring-gray-300 rounded-lg font-galada h-[46mm] relative background-logo after:!size-32 flex flex-col justify-between">
+              <div className="ring-6 ring-green-700/20 rounded-lg text-green-950 font-galada h-[46mm] relative background-logo after:!size-32 flex flex-col justify-between">
                 {/* heading */}
                 <div className="pt-5 pb-1">
                   <p className="text-center text-2xl">{instituteInfo.name}</p>
                   <p className="text-center text-sm font-bangla">
-                    {instituteInfo.examTitle}
+                    {instituteInfo?.examTitle} পরীক্ষা - {instituteInfo?.examYear}
                     {/* {[8, 7, 6].includes(student.class_code) ? instituteInfo.examTitle : "মাসিক মূল্যায়ন পরীক্ষা - জুন/২০২৬ইং"} */}
                   </p>
                 </div>

@@ -87,7 +87,8 @@ const MonthlyExam = () => {
   const instituteInfo = {
     name: "মাদ্‌রাসাতুল হাদিস",
     address: "পুঠিয়ারপাড়, সরিষাবাড়ী, জামালপুর।",
-    examTitle: "দ্বিতীয় সাময়িক পরীক্ষা - ২০২৬ইং",
+    examTitle: "তৃতীয় সাময়িক",
+    examYear: "২০২৬ইং",
     examStartTime: "সকাল ৯টা",
   };
 
@@ -119,7 +120,12 @@ const MonthlyExam = () => {
             {/* office routine */}
             {/* <MonthlyExamOfficeRoutine
               instituteInfo={instituteInfo}
-              data={routine}
+              data={routine.slice(0, 5)}
+            />
+
+            <MonthlyExamOfficeRoutine
+              instituteInfo={instituteInfo}
+              data={routine.slice(5, 8)}
             /> */}
 
             {/* classbase routine */}
@@ -129,14 +135,19 @@ const MonthlyExam = () => {
             <AdmitCardLayout
               instituteInfo={instituteInfo}
               routine={routine}
+              // data={students}
               data={students.filter(student =>
-                [215, 216].includes(student.id))}
+                [8].includes(student.class_code))}
             />
 
             {/* roll number slip */}
-            {/* <RollNumberSlip instituteInfo={instituteInfo} data={students.filter(student =>
-              [1, 2, 3, 4, 5].includes(student.class_code)
-            )} /> */}
+            {/* <RollNumberSlip
+              instituteInfo={instituteInfo}
+              data={students}
+              // data={students.filter(student =>
+              //   [1, 2, 3, 4, 5].includes(student.class_code)
+              // )}
+            /> */}
 
             {/* Class Room Tag */}
             {/* <ClassRoomTag instituteInfo={instituteInfo} data={classData} /> */}

@@ -17,13 +17,13 @@ const MonthlyExamOfficeRoutine = ({ data = [], instituteInfo }) => {
         <div className="text-center mb-6 mt-6">
           <h1 className="text-[32pt] font-galada">{instituteInfo?.name}</h1>
           <p>{instituteInfo?.address}</p>
-          <p className="mt-1">{instituteInfo?.examTitle}</p>
+          <p className="mt-1">{instituteInfo?.examTitle} পরীক্ষা - {instituteInfo?.examYear}</p>
         </div>
 
         {/* Title */}
         <div className="text-center">
           <h2 className=" text-white bg-gray-500 inline-block pb-1 pt-2.5 px-14 rounded-t-4xl text-[18pt]">
-            দ্বিতীয় সাময়িক পরীক্ষার অফিস রুটিন
+            {instituteInfo?.examTitle} পরীক্ষার অফিস রুটিন
           </h2>
         </div>
 
